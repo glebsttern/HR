@@ -1,0 +1,89 @@
+.section {
+  padding: var(--spacing-120) var(--page-gutter);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-32);
+  max-width: var(--content-width);
+  margin: 0 auto;
+}
+
+.title {
+  font-size: var(--font-size-display-m);
+  font-weight: 700;
+  line-height: var(--line-height-snug);
+}
+
+/* поиск */
+.search {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  height: var(--spacing-56);
+  padding-left: var(--spacing-20);
+  border: 1px solid var(--search-border);
+  border-radius: var(--radius-full);
+  background: var(--search-bg);
+  box-shadow: var(--shadow-search);
+}
+
+.searchInput {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  background: none;
+  font-size: var(--font-size-body-m);
+  color: var(--text-primary);
+}
+
+.searchInput::placeholder {
+  color: var(--input-text-placeholder);
+}
+
+.searchInput:focus {
+  outline: none;
+}
+
+.searchButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: var(--spacing-56);
+  height: var(--spacing-56);
+  margin: -1px -1px -1px 0;
+  border-radius: var(--radius-full);
+  background: var(--search-btn-bg);
+  color: var(--text-inverse);
+  transition: background-color 0.18s ease;
+}
+
+.searchButton:hover {
+  background: var(--search-btn-bg-hover);
+}
+
+/* фильтры */
+.filters {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--spacing-8);
+}
+
+/* список карточек */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+@media (max-width: 900px) {
+  .section {
+    padding: var(--spacing-64) var(--spacing-24);
+  }
+
+  .filters {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

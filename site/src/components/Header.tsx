@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Button } from "./Button";
 import { Logo } from "./Logo";
 import { NavItem } from "./NavItem";
@@ -12,9 +13,9 @@ const NAV = [
 export function Header() {
   return (
     <header className={styles.header}>
-      <a href="/" aria-label="SoftClub — на главную">
+      <Link href="/" aria-label="SoftClub — на главную">
         <Logo height={57} />
-      </a>
+      </Link>
 
       <div className={styles.right}>
         <nav className={styles.nav}>

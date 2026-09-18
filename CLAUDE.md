@@ -1,0 +1,78 @@
+# HR Site — правила проекта
+
+Пересборка `job.softclub.by` в стиле-механике `whitesnake.by`, с брендингом SoftClub. План проекта: `C:\Users\kiril\.claude\plans\rosy-riding-corbato.md`.
+
+## Источники стиля/бренда — не путать
+
+- **Механика стиля** (типографика, форма компонентов, тени/свет, плотность, pill-кнопки) — берётся с https://whitesnake.by/
+- **Бренд** (цвет, логотип) — берётся с https://job.softclub.by/. Главный акцент — **зелёный SoftClub**, не красный whitesnake. Логотип — только с job.softclub.by.
+
+## Figma-файлы
+
+- **HR Library** (переменные + компоненты): https://www.figma.com/design/UPfefWk5FHbm4ljnfzeJrr/HR-Library
+- **HR Icons** (библиотека иконок Lucide/HR): https://www.figma.com/design/8sNZMKkRGJz5uxoke7pMUv/HR-Icons
+- **HR Site** (макеты — главная/список вакансий/вакансия, desktop+mobile): https://www.figma.com/design/w4fesD9nU0OGw1Ud3W4S0B/HR-Site
+
+## Жёсткие правила
+
+1. **Макеты собираются только в HR Site.** HR Library — файл дизайн-системы, макеты внутри него не строятся никогда (HR Site подключает HR Library как библиотеку).
+2. **Иконки в компонентах — только инстансы из HR Icons.** Никогда не копия с внутренней reference-страницы и не локальный векторный рисунок.
+3. **Иерархия переменных: primitives → semantic → component.** Semantic — только алиасы primitives, без хардкода значений. Component-токены — алиасы semantic.
+4. **Мобильная версия обязательна** для каждого экрана (отдельный фрейм, не просто resize).
+5. Структура переменных проверяется на соответствие целевому стилю/бренду перед тем, как заводить компоненты (см. Этап 1 плана), а не после.
+
+## Скиллы проекта
+
+Установлены в `.claude/skills/`. Порядок использования — см. таблицу в плане. Кратко:
+
+| Когда | Скилл |
+|---|---|
+| Индексация переменных/компонентов HR Library (read-only) | `ds-ingest` |
+| Сборка макетов в HR Site из индекса | `ds-build` |
+| Разбор механики стиля whitesnake.by (тени, типографика) | `design-decompose` |
+| Проверка, что кодовые интерактивы реально работают | `flow-to-app` |
+| Аудит сгенерённого кода на типовые ИИ-паттерны | `design-anti-slop` |
+| Карта переходов перед вёрсткой в коде | `ia-first` |
+| Анимация/полировка UI в коде | `emil-design-eng` |
+| Индекс `ds/` → React-компоненты + Storybook (Этап 5) | `ds-to-storybook` |
+
+Не используем (сознательно, см. план — раздел «Сознательно не используем»): `handoff-to-figma`, `figma-ds-link` (старая), `style-decompose`, `design-loop`, `wireframe-board`.
+
+## Дизайн-система
+
+В среду внесена ДС через `ds-ingest`. Правила работы с интерфейсом — в `ds/CONTRACT.md`.
+При любой задаче на экраны/формы/компоненты:
+1. Прочитай `ds/CONTRACT.md`.
+2. Прочитай `ds/foundation.md` и `ds/components.md` для актуальных токенов и каталога.
+3. Действуй строго по контракту. Сборку выполняет скилл `ds-build`.
+
+**Именование:** все слои в Figma — PascalCase, только латиница (русский допустим лишь в контенте текстовых слоёв). Варианты — `Property=Value` в PascalCase. Переменные-токены остаются в конвенции `group/name` (lowercase со слэшами).
+
+**Статус на 2026-09-17:** Variables — 220 шт., 6 коллекций, полностью на месте. Блокер бренда закрыт: акцент (`action/primary`, `text/accent`, `border/accent`, `action/primary-hover`) переведён на шкалу `green/400–700` (SoftClub, замерена с job.softclub.by). Error-состояния отвязаны от accent (`text/error`/`border/error` на `red/*`). Заведены шкалы `success/warning/info/400-700` + парные Semantic-токены. Подробности — `ds/foundation.md` → Замечания.
+
+**Каталог компонентов заполнен** — страница Components в HR Library содержит 16 компонентов/наборов (Logo, Button — 27 вариантов, Input, FileUpload, Search, Card, Divider, **Header**, **NavItem**, Dropdown, Social, Sticky, Tag, Badge, Avatar, PaginationItem) + PaginationExample + 2 кастомные иконки (секция CustomIcons), все на реальных Variables. Логотип — настоящий, с job.softclub.by. `ds-build` может собирать экраны.
+
+**Текущий этап:** страница вакансий. План: собрать страницу → опубликовать сайт с этой одной страницей → итерация правок сайта и Figma → следующая страница.
+
+Сделано по странице:
+- `Header` (HR Library, 1660, sticky, фон-стекло, атомы Logo + NavItem + Button) — общий для всех страниц.
+- `Footer` (HR Library `146:64`, 1660): Logo + ссылки меню + `Social`, `Divider`, копирайт и ссылка на softclub.by (+ 5 токенов `footer/*`). Общий для всех страниц. ⚠️ Реальных контактов нет — на job.softclub.by подвала не существует, почту/телефон/соцсети не выдумывал.
+- **HR Library опубликована как библиотека и подключена к HR Site** (2026-09-17). В HR Site токены и компоненты тянутся импортом по ключу — свои копии переменных заводить нельзя.
+- `HeroScreen` — HR Site, node `7:40`, 1660×1080: крупный заголовок с акцентным словом, рукописные росчерки (подчёркивание + овал), медиа-карточка, подпись, две кнопки-инстанса ДС, стикеры по бокам. Шапка в экран не входит.
+- `Sticker` — HR Site, node `14:32`, ComponentSet `Variant: Message | Comment | Person`, лежит под экраном.
+- `Select` — HR Library, node `127:81`, `State: Default | Hover | Open | Selected | Disabled`, в стиле поля `Input` (+ 10 токенов `select/*`).
+- `Radio` — HR Library, node `127:89`, `State: Default | DefaultHover | Active | ActiveHover | Disabled` (+ 9 токенов `radio/*`).
+- `SearchButton` — HR Library, node `137:58`, `State: Default | Hover`; вынесен из `Search`, который теперь держит его инстансом.
+- `Textarea` (HR Library `139:90`, 5 состояний, на токенах `input/*`) и `Checkbox` (`139:102`, 5 состояний, + 8 токенов `checkbox/*`).
+- `ApplicationForm` — HR Site `27:276`: анкета отклика целиком (Направление, Фамилия Имя, Телефон, Эл.почта, LinkedIn, Формат работы, Резюме, Сообщение, согласие, кнопка). Подпись слева / поле справа, все поля — инстансы `Select`, `Input`, `Radio`, `FileUpload`, `Textarea`, `Checkbox`, `Button`.
+- Фильтры в `SearchFilters` заполнены четырьмя `Select`.
+- `VacanciesPage` — HR Site `31:241`, фрейм 1660×3845, **страница собрана целиком**: `Header` абсолютом поверх хиро (стеклянная шапка), `HeroScreen`, центрованный контент (`VacancyList` + `ApplicationForm`, колонка 1040, отступы `spacing/120`), `Footer`.
+- `VacancyCard` (HR Site `18:105`), `SearchFilters` (`18:115`), `VacancyList` (`18:123`) — собраны из атомов HR Library (Tag, Search, Select).
+
+⚠️ **После любых изменений в HR Library её нужно переопубликовать**, иначе HR Site не увидит новые компоненты/токены (так было с `Select`).
+
+Открытые вопросы: назначение `Sticky`, мобильные версии компонентов (отложены), черновые hover-токены «по аналогии» — см. `ds/components.md` → Замечания.
+
+## Артефакты индекса ДС
+
+`ds-ingest` пишет в `ds/` (`foundation.md`, `components.md`, `CONTRACT.md`, `_scan/`). Это источник правды о текущем состоянии HR Library для `ds-build` и позже для `ds-to-storybook` — не пересканировать Figma заново, если индекс уже есть и актуален.

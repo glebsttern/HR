@@ -1,0 +1,16 @@
+# зависимости и сборка
+node_modules/
+.next/
+out/
+build/
+dist/
+
+# окружение
+.env
+.env.local
+.env.*.local
+
+# системное
+.DS_Store
+Thumbs.db
+*.log

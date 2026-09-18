@@ -18,16 +18,27 @@ type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
   options: string[];
 };
 
-export function Select({ placeholder, options, ...rest }: SelectProps) {
-  const [value, setValue] = useState("");
+export function Select({
+  placeholder,
+  options,
+  value,
+  onChange,
+  ...rest
+}: SelectProps) {
+  // Без внешнего value поле живёт само по себе, с ним — подчиняется родителю.
+  const [innerValue, setInnerValue] = useState("");
+  const current = value === undefined ? innerValue : String(value);
 
   return (
     <span className={styles.selectWrap}>
       <select
         className={`${styles.field} ${styles.select}`}
-        value={value}
-        data-placeholder={value === ""}
-        onChange={(event) => setValue(event.target.value)}
+        value={current}
+        data-placeholder={current === ""}
+        onChange={(event) => {
+          if (value === undefined) setInnerValue(event.target.value);
+          onChange?.(event);
+        }}
         {...rest}
       >
         <option value="">{placeholder}</option>

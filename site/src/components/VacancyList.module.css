@@ -1,19 +1,47 @@
 .section {
-  padding: var(--spacing-120) var(--page-gutter);
+  padding: var(--spacing-80) var(--page-gutter);
 }
 
 .inner {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-32);
-  max-width: var(--content-width);
+  max-width: var(--shell-width);
   margin: 0 auto;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--spacing-16);
 }
 
 .title {
   font-size: var(--font-size-display-m);
   font-weight: 700;
   line-height: var(--line-height-snug);
+}
+
+.count {
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-m);
+}
+
+/* левый рельс с фильтрами + список справа */
+.layout {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: var(--spacing-40);
+  align-items: start;
+}
+
+.rail {
+  position: sticky;
+  top: calc(var(--header-height) + var(--spacing-24));
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
 }
 
 /* поиск */
@@ -64,11 +92,17 @@
   background: var(--search-btn-bg-hover);
 }
 
-/* фильтры */
-.filters {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--spacing-8);
+.reset {
+  align-self: flex-start;
+  padding: var(--spacing-8) 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-s);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.reset:hover {
+  color: var(--text-accent);
 }
 
 /* список карточек */
@@ -78,12 +112,37 @@
   gap: var(--spacing-16);
 }
 
+.empty {
+  padding: var(--spacing-40);
+  border: 1px dashed var(--border-default);
+  border-radius: var(--radius-24);
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-m);
+  text-align: center;
+}
+
+@media (max-width: 1100px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .rail {
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .search {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 900px) {
   .section {
     padding: var(--spacing-64) var(--spacing-24);
   }
 
-  .filters {
-    grid-template-columns: repeat(2, 1fr);
+  .rail {
+    grid-template-columns: 1fr;
   }
 }

@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import { Button } from "./Button";
 import { Checkbox, FileUpload, Input, Radio, Select, Textarea } from "./form";
 import styles from "./ApplicationForm.module.css";
@@ -23,9 +26,18 @@ function Row({
 }
 
 export function ApplicationForm() {
+  const [sent, setSent] = useState(false);
+
   return (
     <section className={styles.section} id="apply">
-      <form className={styles.inner}>
+      <form
+        className={styles.inner}
+        onSubmit={(event) => {
+          // Приёмника пока нет — это заглушка до появления реального адреса отправки.
+          event.preventDefault();
+          setSent(true);
+        }}
+      >
         <h2 className={styles.title}>Отправить резюме</h2>
 
         <Row label="Направление" required>
@@ -92,6 +104,13 @@ export function ApplicationForm() {
             <Button type="submit" variant="primary" size="large">
               Отправить
             </Button>
+
+            {sent && (
+              <p className={styles.sent} role="status">
+                Спасибо, анкета заполнена. Отправка пока не подключена — форма
+                ждёт реального адреса получателя.
+              </p>
+            )}
           </div>
         </div>
       </form>

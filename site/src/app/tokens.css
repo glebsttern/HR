@@ -289,5 +289,6 @@
   --page-width: 1660px;
   --page-gutter: var(--spacing-80);
   --content-width: 1040px;
+  --shell-width: 1320px;
   --header-height: 89px;
 }

@@ -2,14 +2,19 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-32);
   padding: var(--spacing-16) var(--page-gutter);
   background: var(--header-bg-glass);
   backdrop-filter: blur(var(--blur-glass));
   -webkit-backdrop-filter: blur(var(--blur-glass));
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-32);
+  max-width: var(--shell-width);
+  margin: 0 auto;
 }
 
 .right {

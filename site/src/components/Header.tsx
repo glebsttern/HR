@@ -13,22 +13,24 @@ const NAV = [
 export function Header() {
   return (
     <header className={styles.header}>
-      <Link href="/" aria-label="SoftClub — на главную">
-        <Logo height={57} />
-      </Link>
+      <div className={styles.inner}>
+        <Link href="/" aria-label="SoftClub — на главную">
+          <Logo height={57} />
+        </Link>
 
-      <div className={styles.right}>
-        <nav className={styles.nav}>
-          {NAV.map((item) => (
-            <NavItem key={item.href} href={item.href} active={item.active}>
-              {item.label}
-            </NavItem>
-          ))}
-        </nav>
+        <div className={styles.right}>
+          <nav className={styles.nav}>
+            {NAV.map((item) => (
+              <NavItem key={item.href} href={item.href} active={item.active}>
+                {item.label}
+              </NavItem>
+            ))}
+          </nav>
 
-        <Button variant="primary" size="medium">
-          Отправить резюме
-        </Button>
+          <Button variant="primary" size="medium">
+            Отправить резюме
+          </Button>
+        </div>
       </div>
     </header>
   );

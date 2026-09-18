@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-32);
-  max-width: var(--content-width);
+  max-width: var(--shell-width);
   margin: 0 auto;
 }
 
@@ -18,7 +18,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 240px minmax(0, 640px);
   gap: var(--spacing-40);
   align-items: start;
 }
@@ -42,7 +42,7 @@
 
 .actions {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 240px minmax(0, 640px);
   gap: var(--spacing-40);
 }
 
@@ -67,4 +67,10 @@
   .label {
     padding-top: 0;
   }
+}
+
+.sent {
+  color: var(--text-accent);
+  font-size: var(--font-size-body-s);
+  font-weight: 600;
 }

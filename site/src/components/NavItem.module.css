@@ -1,0 +1,27 @@
+.navItem {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-16) var(--spacing-24);
+  border-radius: var(--radius-full);
+  background: var(--navitem-bg);
+  color: var(--navitem-text);
+  font-size: var(--font-size-label-l);
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.navItem:hover {
+  background: var(--navitem-bg-hover);
+  color: var(--navitem-text-hover);
+}
+
+.active {
+  background: var(--navitem-bg-active);
+  color: var(--navitem-text-active);
+}
+
+.active:hover {
+  background: var(--navitem-bg-active);
+  color: var(--navitem-text-active);
+}

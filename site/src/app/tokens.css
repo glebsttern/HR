@@ -1,0 +1,293 @@
+/*
+ * Токены дизайн-системы HR Library.
+ * Иерархия та же, что в Figma: primitives -> semantic -> component.
+ * Semantic ссылается только на primitives, component — только на semantic.
+ * Источник значений: ds/foundation.md. Прибивать значения мимо этого файла нельзя.
+ */
+
+:root {
+  /* ---------------------------------------------------------------- */
+  /* Слой 1 — примитивы                                                */
+  /* ---------------------------------------------------------------- */
+
+  --neutral-0: #ffffff;
+  --neutral-25: #f8f8fa;
+  --neutral-50: #f7f7f7;
+  --neutral-100: #efefef;
+  --neutral-200: #e0e0e0;
+  --neutral-300: #bdbdbd;
+  --neutral-400: #9e9e9e;
+  --neutral-450: #73777d;
+  --neutral-500: #757575;
+  --neutral-600: #616161;
+  --neutral-700: #424242;
+  --neutral-800: #2e2e2e;
+  --neutral-900: #1a1a1a;
+  --neutral-1000: #111111;
+
+  /* бренд SoftClub — замерено на job.softclub.by */
+  --green-50: #e7f3ec;
+  --green-400: #0cb65e;
+  --green-500: #008c44;
+  --green-600: #006632;
+  --green-700: #004220;
+
+  /* красный остался под error-состояния */
+  --red-400: #f05252;
+  --red-500: #e63333;
+  --red-600: #cc2222;
+  --red-700: #b01414;
+
+  --success-400: #51f08c;
+  --success-500: #33e674;
+  --success-600: #22ce61;
+  --success-700: #13ae4c;
+
+  --warning-400: #f0b651;
+  --warning-500: #e6a433;
+  --warning-600: #ce8f22;
+  --warning-700: #ae7613;
+
+  --info-400: #518ef0;
+  --info-500: #3377e6;
+  --info-600: #2264ce;
+  --info-700: #134fae;
+
+  --black-overlay-10: rgba(0, 0, 0, 0.1);
+  --black-overlay-40: rgba(0, 0, 0, 0.4);
+  --white-overlay-80: rgba(255, 255, 255, 0.8);
+  --blue-border-light: #e1e2fb;
+
+  /* отступы */
+  --spacing-2: 2px;
+  --spacing-4: 4px;
+  --spacing-6: 6px;
+  --spacing-8: 8px;
+  --spacing-12: 12px;
+  --spacing-16: 16px;
+  --spacing-20: 20px;
+  --spacing-24: 24px;
+  --spacing-32: 32px;
+  --spacing-40: 40px;
+  --spacing-48: 48px;
+  --spacing-56: 56px;
+  --spacing-64: 64px;
+  --spacing-80: 80px;
+  --spacing-96: 96px;
+  --spacing-120: 120px;
+  --spacing-160: 160px;
+
+  /* радиусы */
+  --radius-0: 0px;
+  --radius-4: 4px;
+  --radius-8: 8px;
+  --radius-12: 12px;
+  --radius-16: 16px;
+  --radius-24: 24px;
+  --radius-full: 9999px;
+
+  /* типографика */
+  --font-family-primary: var(--font-inter), "Inter", system-ui, sans-serif;
+
+  --font-size-display-xl: 80px;
+  --font-size-display-l: 64px;
+  --font-size-display-m: 48px;
+  --font-size-h1: 40px;
+  --font-size-h2: 32px;
+  --font-size-h3: 24px;
+  --font-size-h4: 20px;
+  --font-size-h5: 16px;
+  --font-size-body-l: 18px;
+  --font-size-body-m: 16px;
+  --font-size-body-s: 14px;
+  --font-size-label-l: 16px;
+  --font-size-label-m: 14px;
+  --font-size-label-s: 12px;
+  --font-size-caption-m: 12px;
+  --font-size-caption-s: 10px;
+  --font-size-nav: 13px;
+  --font-size-btn-l: 14px;
+  --font-size-btn-m: 13px;
+  --font-size-btn-s: 12px;
+  --font-size-tag: 11px;
+
+  --line-height-tight: 1;
+  --line-height-snug: 1.1;
+  --line-height-normal: 1.3;
+  --line-height-relaxed: 1.4;
+  --line-height-loose: 1.6;
+
+  /* тени и блюр — в Figma это Effect Styles, переменных такого типа там нет */
+  --shadow-card: 0 5px 25px rgba(0, 0, 0, 0.1);
+  --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.16);
+  --shadow-search: 0 4px 9px rgba(0, 0, 0, 0.04);
+  --blur-glass: 20px;
+
+  /* ---------------------------------------------------------------- */
+  /* Слой 2 — семантика (только алиасы примитивов)                     */
+  /* ---------------------------------------------------------------- */
+
+  --bg-page: var(--neutral-100);
+  --bg-surface: var(--neutral-0);
+  --bg-surface-elevated: var(--neutral-0);
+  --bg-muted: var(--neutral-100);
+  --bg-muted-hover: var(--neutral-200);
+  --bg-accent-subtle: var(--green-50);
+  --bg-glass: var(--white-overlay-80);
+  --bg-input: var(--neutral-0);
+  --bg-input-disabled: var(--neutral-200);
+
+  --text-primary: var(--neutral-1000);
+  --text-secondary: var(--neutral-500);
+  --text-disabled: var(--neutral-300);
+  --text-inverse: var(--neutral-0);
+  --text-accent: var(--green-500);
+  --text-placeholder: var(--neutral-450);
+  --text-error: var(--red-500);
+  --text-success: var(--success-500);
+  --text-warning: var(--warning-500);
+  --text-info: var(--info-500);
+
+  --border-default: var(--neutral-200);
+  --border-strong: var(--neutral-400);
+  --border-accent: var(--green-500);
+  --border-input: var(--blue-border-light);
+  --border-error: var(--red-500);
+  --border-success: var(--success-500);
+  --border-warning: var(--warning-500);
+  --border-info: var(--info-500);
+
+  --action-primary: var(--green-500);
+  --action-primary-hover: var(--green-600);
+  --action-primary-text: var(--neutral-0);
+  --action-btn-secondary: var(--neutral-1000);
+  --action-btn-secondary-text: var(--neutral-0);
+  --action-btn-outline-bg: var(--neutral-0);
+  --action-btn-outline-border: var(--neutral-1000);
+  --action-btn-outline-text: var(--neutral-1000);
+
+  /* ---------------------------------------------------------------- */
+  /* Слой 3 — компонентные токены (только алиасы семантики)            */
+  /* ---------------------------------------------------------------- */
+
+  --button-primary-bg: var(--action-primary);
+  --button-primary-bg-hover: var(--action-primary-hover);
+  --button-primary-text: var(--action-primary-text);
+  --button-secondary-bg: var(--action-btn-secondary);
+  --button-secondary-text: var(--action-btn-secondary-text);
+  --button-outline-bg: var(--action-btn-outline-bg);
+  --button-outline-bg-hover: var(--action-btn-secondary);
+  --button-outline-border: var(--action-btn-outline-border);
+  --button-outline-text: var(--action-btn-outline-text);
+  --button-outline-text-hover: var(--action-btn-secondary-text);
+  --button-disabled-bg: var(--text-disabled);
+  --button-disabled-text: var(--text-secondary);
+
+  --header-bg: var(--bg-surface);
+  --header-bg-glass: var(--bg-glass);
+  --header-border: var(--border-default);
+  --header-text: var(--text-secondary);
+  --header-text-active: var(--text-primary);
+  --header-text-accent: var(--text-accent);
+
+  --navitem-bg: var(--bg-muted);
+  --navitem-bg-hover: var(--bg-muted-hover);
+  --navitem-bg-active: var(--bg-accent-subtle);
+  --navitem-text: var(--text-primary);
+  --navitem-text-hover: var(--text-primary);
+  --navitem-text-active: var(--text-accent);
+
+  --input-bg: var(--bg-input);
+  --input-bg-disabled: var(--bg-input-disabled);
+  --input-border-default: var(--border-input);
+  --input-border-hover: var(--border-strong);
+  --input-border-focus: var(--text-primary);
+  --input-border-error: var(--border-error);
+  --input-text-value: var(--text-primary);
+  --input-text-placeholder: var(--text-placeholder);
+  --input-text-label: var(--text-primary);
+  --input-text-hint: var(--text-secondary);
+  --input-text-error: var(--text-error);
+  --input-text-disabled: var(--text-disabled);
+
+  --select-bg: var(--bg-input);
+  --select-bg-hover: var(--bg-input);
+  --select-bg-disabled: var(--bg-input-disabled);
+  --select-border: var(--border-input);
+  --select-border-hover: var(--border-strong);
+  --select-border-open: var(--text-primary);
+  --select-text: var(--text-primary);
+  --select-text-placeholder: var(--text-placeholder);
+  --select-text-disabled: var(--text-disabled);
+  --select-icon: var(--text-secondary);
+
+  --radio-bg: var(--bg-input);
+  --radio-bg-active-hover: var(--bg-accent-subtle);
+  --radio-bg-disabled: var(--bg-input-disabled);
+  --radio-border: var(--border-input);
+  --radio-border-hover: var(--border-strong);
+  --radio-border-active: var(--action-primary);
+  --radio-border-disabled: var(--text-disabled);
+  --radio-dot: var(--action-primary);
+  --radio-dot-disabled: var(--text-disabled);
+
+  --checkbox-bg: var(--bg-input);
+  --checkbox-bg-checked: var(--action-primary);
+  --checkbox-bg-checked-hover: var(--action-primary-hover);
+  --checkbox-bg-disabled: var(--bg-input-disabled);
+  --checkbox-border: var(--border-input);
+  --checkbox-border-hover: var(--border-strong);
+  --checkbox-border-disabled: var(--text-disabled);
+  --checkbox-icon: var(--action-primary-text);
+
+  --search-bg: var(--bg-surface);
+  --search-border: var(--border-input);
+  --search-icon: var(--text-secondary);
+  --search-btn-bg: var(--action-primary);
+  --search-btn-bg-hover: var(--action-primary-hover);
+
+  --fileupload-bg: var(--bg-page);
+  --fileupload-bg-filled: var(--bg-surface);
+  --fileupload-border: var(--text-primary);
+  --fileupload-border-hover: var(--action-primary);
+  --fileupload-text: var(--text-primary);
+  --fileupload-text-hover: var(--action-primary);
+  --fileupload-icon: var(--text-secondary);
+
+  --tag-bg: var(--bg-surface);
+  --tag-bg-active: var(--action-primary);
+  --tag-border: var(--border-default);
+  --tag-text: var(--text-primary);
+  --tag-text-active: var(--action-primary-text);
+
+  --badge-bg-hot: var(--action-primary);
+  --badge-text-hot: var(--action-primary-text);
+  --badge-bg-new: var(--bg-surface-elevated);
+  --badge-text-new: var(--text-primary);
+
+  --card-bg: var(--bg-surface);
+  --card-border: var(--border-default);
+  --card-title: var(--text-primary);
+  --card-subtitle: var(--text-secondary);
+
+  --divider-color: var(--border-default);
+
+  --social-bg: var(--bg-surface-elevated);
+  --social-bg-hover: var(--text-primary);
+  --social-icon: var(--text-primary);
+  --social-icon-hover: var(--action-primary-text);
+
+  --footer-bg: var(--bg-surface);
+  --footer-text: var(--text-secondary);
+  --footer-link: var(--text-primary);
+  --footer-link-hover: var(--text-accent);
+
+  /* ---------------------------------------------------------------- */
+  /* Раскладка страницы                                                */
+  /* ---------------------------------------------------------------- */
+
+  --page-width: 1660px;
+  --page-gutter: var(--spacing-80);
+  --content-width: 1040px;
+  --header-height: 89px;
+}

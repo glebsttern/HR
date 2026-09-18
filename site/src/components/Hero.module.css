@@ -1,0 +1,158 @@
+.hero {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - var(--header-height));
+  padding: var(--spacing-96) var(--page-gutter) var(--spacing-120);
+  overflow: hidden;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-64);
+  width: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+.heading {
+  font-size: clamp(2.25rem, 5.4vw, var(--font-size-display-xl));
+  font-weight: 600;
+  line-height: var(--line-height-snug);
+  letter-spacing: -0.01em;
+}
+
+.muted {
+  color: var(--text-secondary);
+}
+
+.thirdLine {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-24);
+  flex-wrap: wrap;
+}
+
+/* рукописные росчерки — как на whitesnake.by */
+.underlined,
+.circled {
+  position: relative;
+  display: inline-block;
+}
+
+.underlined .scribble {
+  position: absolute;
+  left: 4%;
+  bottom: -0.3em;
+  width: 96%;
+  height: 0.28em;
+  color: var(--text-secondary);
+}
+
+.circled {
+  color: var(--text-accent);
+  padding-inline: 0.06em;
+}
+
+.circled .scribble {
+  position: absolute;
+  left: -6%;
+  top: -0.14em;
+  width: 112%;
+  height: 1.3em;
+  color: var(--text-accent);
+  pointer-events: none;
+}
+
+.scribble path {
+  vector-effect: non-scaling-stroke;
+}
+
+/* медиа-карточка вместо видео-превью */
+.media {
+  position: relative;
+  flex: none;
+  width: 282px;
+  height: 132px;
+  border-radius: var(--radius-16);
+  background: var(--bg-muted);
+  border: 1px solid var(--border-default);
+  overflow: hidden;
+}
+
+.play {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-full);
+  background: var(--text-primary);
+  color: var(--text-inverse);
+}
+
+.mediaCaption {
+  position: absolute;
+  left: var(--spacing-16);
+  bottom: var(--spacing-12);
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption-m);
+  font-weight: 500;
+  line-height: var(--line-height-normal);
+}
+
+.tagline {
+  color: var(--text-primary);
+  font-size: var(--font-size-h3);
+  font-weight: 500;
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-16);
+  flex-wrap: wrap;
+}
+
+/* стикеры по бокам */
+.sticker {
+  position: absolute;
+}
+
+.stickerComment {
+  top: 210px;
+  right: 120px;
+  transform: rotate(5deg);
+}
+
+.stickerPerson {
+  top: 420px;
+  right: 190px;
+  transform: rotate(-4deg);
+}
+
+.stickerMessage {
+  bottom: var(--spacing-64);
+  left: var(--page-gutter);
+  transform: rotate(-6deg);
+}
+
+@media (max-width: 1280px) {
+  .sticker {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero {
+    padding: var(--spacing-64) var(--spacing-24) var(--spacing-64);
+  }
+
+  .inner {
+    gap: var(--spacing-40);
+  }
+}

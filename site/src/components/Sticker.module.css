@@ -1,12 +1,33 @@
 .sticker {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-12);
-  width: 240px;
-  padding: var(--spacing-12);
+  flex-direction: column;
+  gap: var(--spacing-8);
+  width: 220px;
+  padding: var(--spacing-16);
   border-radius: var(--radius-16);
   background: var(--card-bg);
   box-shadow: var(--shadow-card);
+  text-align: left;
+}
+
+.withAvatar {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-12);
+}
+
+.value {
+  color: var(--text-accent);
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: var(--line-height-tight);
+}
+
+.caption {
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-s);
+  font-weight: 500;
+  line-height: var(--line-height-normal);
 }
 
 .avatar {
@@ -31,10 +52,20 @@
 }
 
 .label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
   color: var(--text-secondary);
   font-size: var(--font-size-caption-m);
   font-weight: 600;
   line-height: var(--line-height-tight);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  background: var(--text-accent);
 }
 
 .message {

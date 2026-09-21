@@ -2,8 +2,8 @@
   position: relative;
   display: flex;
   align-items: center;
+  min-height: 380px;
   padding: var(--spacing-64) var(--page-gutter) var(--spacing-48);
-  overflow: hidden;
 }
 
 .inner {
@@ -38,31 +38,62 @@
   flex-wrap: wrap;
 }
 
-/* стикеры по бокам */
+/* Стикеры лежат на полях слева и справа от текста — в четырёх фиксированных
+   местах. Какие именно стикеры и в какие места лягут, решает клиент при
+   загрузке, поэтому набор меняется от перезагрузки к перезагрузке. */
+.stickers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 .sticker {
   position: absolute;
+  opacity: 0;
+  transform: rotate(var(--tilt)) translateY(12px) scale(0.96);
+  animation: drop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
-.stickerComment {
-  top: var(--spacing-40);
-  right: var(--spacing-80);
-  transform: rotate(5deg);
+@keyframes drop {
+  to {
+    opacity: 1;
+    transform: rotate(var(--tilt)) translateY(0) scale(1);
+  }
 }
 
-.stickerPerson {
-  bottom: var(--spacing-32);
-  right: var(--spacing-120);
-  transform: rotate(-4deg);
-}
-
-.stickerMessage {
-  bottom: var(--spacing-32);
+.leftTop {
+  --tilt: -5deg;
+  top: var(--spacing-32);
   left: var(--page-gutter);
-  transform: rotate(-6deg);
 }
 
-@media (max-width: 1280px) {
+.leftBottom {
+  --tilt: -3deg;
+  bottom: var(--spacing-32);
+  left: calc(var(--page-gutter) + var(--spacing-32));
+}
+
+.rightTop {
+  --tilt: 4deg;
+  top: var(--spacing-32);
+  right: var(--page-gutter);
+}
+
+.rightBottom {
+  --tilt: 6deg;
+  bottom: var(--spacing-32);
+  right: calc(var(--page-gutter) + var(--spacing-32));
+}
+
+@media (prefers-reduced-motion: reduce) {
   .sticker {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms !important;
+  }
+}
+
+@media (max-width: 1500px) {
+  .stickers {
     display: none;
   }
 }

@@ -32,6 +32,13 @@ export const IconSearch = (p: IconProps) => (
   </Stroke>
 );
 
+export const IconArrowLeft = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="m12 19-7-7 7-7" />
+    <path d="M19 12H5" />
+  </Stroke>
+);
+
 export const IconChevronDown = (p: IconProps) => (
   <Stroke {...p}>
     <path d="m6 9 6 6 6-6" />

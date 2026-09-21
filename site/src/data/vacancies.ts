@@ -6,8 +6,11 @@ export type Vacancy = {
   profession: string;
   level: string;
   stack: string[];
+  duties: string[];
+  requirements: string[];
 };
 
+/** ⚠️ Содержание вакансий — выдуманное наполнение под макет, не настоящие тексты HR. */
 export const VACANCIES: Vacancy[] = [
   {
     id: "qa-internship",
@@ -18,6 +21,16 @@ export const VACANCIES: Vacancy[] = [
     profession: "QA",
     level: "Junior",
     stack: ["Postman", "SQL"],
+    duties: [
+      "Писать и выполнять тест-кейсы по функциональности банковских продуктов",
+      "Заводить и сопровождать дефекты, проверять исправления",
+      "Разбирать требования вместе с аналитиком и разработчиком",
+    ],
+    requirements: [
+      "Учитесь на мехмате, ФПМ БГУ или в БГУИР",
+      "Понимаете, что такое клиент-серверное приложение и SQL-запрос",
+      "Готовы уделять стажировке не меньше 20 часов в неделю",
+    ],
   },
   {
     id: "java-banking",
@@ -28,6 +41,16 @@ export const VACANCIES: Vacancy[] = [
     profession: "Java",
     level: "Middle",
     stack: ["Spring", "PostgreSQL", "Kafka"],
+    duties: [
+      "Разрабатывать и поддерживать серверную часть банковских систем",
+      "Проектировать интеграции с внутренними и внешними сервисами",
+      "Покрывать код тестами и участвовать в ревью",
+    ],
+    requirements: [
+      "От двух лет коммерческой разработки на Java",
+      "Уверенный Spring, опыт с PostgreSQL",
+      "Понимание очередей сообщений — у нас Kafka",
+    ],
   },
   {
     id: "data-analyst",
@@ -38,6 +61,16 @@ export const VACANCIES: Vacancy[] = [
     profession: "Analytics",
     level: "Middle",
     stack: ["SQL", "Python"],
+    duties: [
+      "Собирать и проверять данные из учётных систем банка",
+      "Строить отчётность и дашборды для бизнес-заказчиков",
+      "Формулировать выводы и защищать их перед заказчиком",
+    ],
+    requirements: [
+      "Уверенный SQL и опыт работы с большими выборками",
+      "Python для обработки данных",
+      "Умение объяснять цифры словами, а не только графиком",
+    ],
   },
   {
     id: "devops",
@@ -48,8 +81,22 @@ export const VACANCIES: Vacancy[] = [
     profession: "DevOps",
     level: "Senior",
     stack: ["Docker", "Kubernetes", "Kafka"],
+    duties: [
+      "Поддерживать и развивать конвейеры сборки и доставки",
+      "Обслуживать инфраструктуру продуктовых команд",
+      "Настраивать мониторинг и разбирать инциденты",
+    ],
+    requirements: [
+      "Опыт с Docker и Kubernetes в продакшене",
+      "Понимание сетей и Linux на уровне администратора",
+      "Опыт автоматизации рутины скриптами",
+    ],
   },
 ];
+
+export function findVacancy(id: string): Vacancy | undefined {
+  return VACANCIES.find((vacancy) => vacancy.id === id);
+}
 
 export type FilterKey = "city" | "profession" | "level" | "stack";
 

@@ -1,0 +1,15 @@
+.circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  border-radius: var(--radius-full);
+  background: var(--bg-muted);
+  color: var(--text-secondary);
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.circle:hover {
+  background: var(--bg-accent-subtle);
+  color: var(--text-accent);
+}

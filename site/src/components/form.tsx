@@ -57,9 +57,10 @@ export function Select({
 
 type ChoiceProps = {
   name: string;
-  label: string;
+  label: React.ReactNode;
   defaultChecked?: boolean;
   small?: boolean;
+  required?: boolean;
 };
 
 export function Radio({ name, label, defaultChecked }: ChoiceProps) {
@@ -76,13 +77,20 @@ export function Radio({ name, label, defaultChecked }: ChoiceProps) {
   );
 }
 
-export function Checkbox({ name, label, defaultChecked, small }: ChoiceProps) {
+export function Checkbox({
+  name,
+  label,
+  defaultChecked,
+  small,
+  required,
+}: ChoiceProps) {
   return (
     <label className={styles.choice}>
       <input
         type="checkbox"
         name={name}
         defaultChecked={defaultChecked}
+        required={required}
         className={`${styles.choiceInput} ${styles.checkboxInput}`}
       />
       <span className={small ? styles.choiceLabelSmall : styles.choiceLabel}>

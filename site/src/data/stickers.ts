@@ -1,9 +1,9 @@
+import { FACTS } from "./company";
 import { VACANCIES } from "./vacancies";
 
 /**
- * ⚠️ Цифры, кроме количества вакансий, — заглушки.
- * Реальных данных по найму SoftClub у нас нет; перед публикацией их нужно
- * либо подтвердить у HR, либо выкинуть соответствующий стикер из пака.
+ * Все факты — с job.softclub.by (цифры компании и раздел «Условия»),
+ * выдуманных цифр в паке нет.
  */
 
 export type Sticker =
@@ -19,48 +19,12 @@ export const STICKERS: Sticker[] = [
     value: String(VACANCIES.length),
     caption: "Открытых вакансий прямо сейчас",
   },
-  {
-    id: "hired",
-    kind: "stat",
-    value: "18",
-    caption: "Человек вышло в команду за последний год",
-  },
-  {
-    id: "internship",
-    kind: "stat",
-    value: "7 лет",
-    caption: "Стажёрской программе для студентов",
-  },
-  {
-    id: "answer",
-    kind: "stat",
-    value: "3 дня",
-    caption: "Средний срок ответа на резюме",
-  },
-  {
-    id: "stay",
-    kind: "stat",
-    value: "60%",
-    caption: "Стажёров остаются в штате",
-  },
-  {
-    id: "steps",
-    kind: "stat",
-    value: "2",
-    caption: "Собеседования до оффера — без марафона",
-  },
-  {
-    id: "team",
-    kind: "stat",
-    value: "300+",
-    caption: "Разработчиков, тестировщиков и аналитиков",
-  },
-  {
-    id: "hybrid",
-    kind: "stat",
-    value: "4/1",
-    caption: "Гибрид: четыре дня дома, один в офисе",
-  },
+  ...FACTS.map((fact, index) => ({
+    id: `fact-${index}`,
+    kind: "stat" as const,
+    value: fact.value,
+    caption: fact.caption,
+  })),
   {
     id: "hiring",
     kind: "status",
@@ -68,10 +32,22 @@ export const STICKERS: Sticker[] = [
     text: "Резюме смотрим каждый день",
   },
   {
-    id: "mentor",
+    id: "office",
     kind: "quote",
-    label: "Наставник в первый месяц",
-    text: "«Проведу по проекту и покажу, где что лежит»",
+    label: "Офисы",
+    text: "Шаговая доступность от метро «Уручье»",
+  },
+  {
+    id: "study",
+    kind: "quote",
+    label: "Учёба",
+    text: "Конференции и тренинги — бесплатно",
+  },
+  {
+    id: "sport",
+    kind: "quote",
+    label: "Спорт",
+    text: "Половину абонемента оплачивает компания",
   },
   {
     id: "students",

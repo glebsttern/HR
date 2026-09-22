@@ -9,10 +9,10 @@ import {
 import styles from "./Footer.module.css";
 
 const NAV = [
-  { href: "#vacancies", label: "Вакансии" },
-  { href: "#about", label: "Работа с нами" },
-  { href: "#terms", label: "Условия" },
-  { href: "#apply", label: "Отправить резюме" },
+  { href: "/", label: "Вакансии" },
+  { href: "/about-us", label: "Работа с нами" },
+  { href: "/terms", label: "Условия" },
+  { href: "/#apply", label: "Отправить резюме" },
 ];
 
 const SOCIAL = [

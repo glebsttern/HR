@@ -134,3 +134,22 @@
   color: var(--text-accent);
   text-decoration: underline;
 }
+
+@media (max-width: 900px) {
+  /* Пальцем нужно попадать: доводим ссылку и «Обновить» до 44px по высоте. */
+  .template,
+  .refresh {
+    min-height: 44px;
+    align-items: center;
+  }
+
+  .refresh {
+    display: inline-flex;
+    padding-inline: var(--spacing-8);
+  }
+
+  .head {
+    align-items: flex-start;
+    gap: var(--spacing-12);
+  }
+}

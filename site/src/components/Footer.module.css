@@ -87,3 +87,18 @@
     padding: var(--spacing-40) var(--spacing-24);
   }
 }
+
+@media (max-width: 900px) {
+  /* Цели касания в подвале доводим до 44px. */
+  .nav {
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .link,
+  .siteLink {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}

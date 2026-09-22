@@ -184,4 +184,18 @@
   .ctaTitle {
     font-size: var(--font-size-h1);
   }
+
+  .lead {
+    font-size: var(--font-size-body-l);
+  }
+
+  .ctaInner {
+    padding: var(--spacing-40) var(--spacing-24);
+  }
+
+  .ctaActions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
 }

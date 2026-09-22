@@ -101,4 +101,30 @@
   .page {
     padding: var(--spacing-40) var(--spacing-24) var(--spacing-64);
   }
+
+  .title {
+    font-size: var(--font-size-h1);
+  }
+
+  .lead {
+    font-size: var(--font-size-body-l);
+  }
+
+  .blockTitle {
+    font-size: var(--font-size-h3);
+  }
+
+  .stack {
+    gap: var(--spacing-12);
+  }
+
+  .back {
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: var(--font-size-h2);
+  }
 }

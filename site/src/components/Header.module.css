@@ -29,12 +29,56 @@
   gap: var(--spacing-8);
 }
 
+/* бургер — только на узких экранах */
+.burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  color: var(--text-primary);
+}
+
+.mobileNav {
+  display: none;
+}
+
 @media (max-width: 900px) {
   .header {
     padding-inline: var(--spacing-24);
   }
 
-  .nav {
+  .nav,
+  .cta {
     display: none;
+  }
+
+  .burger {
+    display: flex;
+  }
+
+  .mobileNav {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    max-width: var(--shell-width);
+    margin: var(--spacing-16) auto 0;
+    padding-top: var(--spacing-16);
+    border-top: 1px solid var(--divider-color);
+  }
+
+  .mobileLink {
+    padding: var(--spacing-12) 0;
+    font-size: var(--font-size-h3);
+    font-weight: 600;
+  }
+
+  .mobileLinkActive {
+    color: var(--text-accent);
+  }
+
+  .mobileCta {
+    margin-top: var(--spacing-8);
   }
 }

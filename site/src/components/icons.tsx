@@ -32,6 +32,21 @@ export const IconSearch = (p: IconProps) => (
   </Stroke>
 );
 
+export const IconMenu = (p: IconProps) => (
+  <Stroke {...p}>
+    <line x1="4" x2="20" y1="7" y2="7" />
+    <line x1="4" x2="20" y1="12" y2="12" />
+    <line x1="4" x2="20" y1="17" y2="17" />
+  </Stroke>
+);
+
+export const IconClose = (p: IconProps) => (
+  <Stroke {...p}>
+    <path d="M18 6 6 18" />
+    <path d="m6 6 12 12" />
+  </Stroke>
+);
+
 export const IconArrowLeft = (p: IconProps) => (
   <Stroke {...p}>
     <path d="m12 19-7-7 7-7" />

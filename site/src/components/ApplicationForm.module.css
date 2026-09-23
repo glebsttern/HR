@@ -36,68 +36,12 @@
   line-height: var(--line-height-normal);
 }
 
-.template {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--spacing-8);
-  padding: var(--spacing-16) var(--spacing-24);
-  border-radius: var(--radius-16);
-  background: var(--bg-accent-subtle);
-  color: var(--text-accent);
-  font-size: var(--font-size-label-l);
-  font-weight: 600;
-  text-align: right;
-}
-
-.templateSub {
-  display: block;
-  color: var(--text-secondary);
-  font-size: var(--font-size-caption-m);
-  font-weight: 500;
-}
-
-.template:hover {
-  background: var(--action-primary);
-  color: var(--text-inverse);
-}
-
-.template:hover .templateSub {
-  color: var(--text-inverse);
-}
-
 /* поля */
-.field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-8);
-  min-width: 0;
-}
-
-.label {
-  color: var(--text-secondary);
-  font-size: var(--font-size-label-l);
-  font-weight: 500;
-}
-
-.required {
-  color: var(--text-error);
-}
 
 .row {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: var(--spacing-24);
-}
-
-.upload {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-8);
-}
-
-.hint {
-  color: var(--text-secondary);
-  font-size: var(--font-size-body-s);
 }
 
 .captchaRow {
@@ -106,21 +50,8 @@
   gap: var(--spacing-16);
 }
 
-.captchaRow .field {
+.captchaRow > :first-child {
   width: 240px;
-}
-
-.refresh {
-  min-height: var(--spacing-56);
-  padding-inline: var(--spacing-8);
-  color: var(--text-secondary);
-  font-size: var(--font-size-body-m);
-  font-weight: 600;
-  text-decoration: underline;
-}
-
-.refresh:hover {
-  color: var(--text-accent);
 }
 
 .error {
@@ -174,10 +105,7 @@
     text-align: left;
   }
 
-  .captchaRow .field {
-    width: auto;
-    flex: 1;
-  }
+  
 
   .footer {
     align-items: stretch;

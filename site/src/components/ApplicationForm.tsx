@@ -3,8 +3,14 @@
 import { useEffect, useState } from "react";
 import { VACANCIES } from "@/data/vacancies";
 import { Button } from "./Button";
-import { Checkbox, FileUpload, Input, Select } from "./form";
-import { IconDownload } from "./icons";
+import {
+  Checkbox,
+  FileUpload,
+  Input,
+  Select,
+  TemplateLink,
+  TextLink,
+} from "./form";
 import styles from "./ApplicationForm.module.css";
 
 /** Шаблон анкеты лежит на job.softclub.by — свою копию не держим. */
@@ -12,27 +18,6 @@ const TEMPLATE_URL = "https://job.softclub.by/docs/SC_JOB_Developer.docx";
 
 function newCaptcha() {
   return { a: 1 + Math.floor(Math.random() * 9), b: 1 + Math.floor(Math.random() * 9) };
-}
-
-/** Подпись над полем — так устроена анкета у оригинала. */
-function Field({
-  label,
-  required,
-  children,
-}: {
-  label: string;
-  required?: boolean;
-  children: React.ReactNode;
-}) {
-  return (
-    <label className={styles.field}>
-      <span className={styles.label}>
-        {label}
-        {required && <span className={styles.required}>*</span>}
-      </span>
-      {children}
-    </label>
-  );
 }
 
 export function ApplicationForm() {
@@ -81,57 +66,51 @@ export function ApplicationForm() {
             />
           </div>
 
-          <a className={styles.template} href={TEMPLATE_URL} download>
-            <IconDownload size={20} />
-            <span>
-              Скачать
-              <span className={styles.templateSub}>шаблон анкеты</span>
-            </span>
-          </a>
+          <TemplateLink
+            href={TEMPLATE_URL}
+            title="Скачать"
+            subtitle="шаблон анкеты"
+          />
         </div>
 
         <div className={styles.row}>
-          <Field label="Фамилия и Имя" required>
-            <Input name="name" placeholder="Иванов Иван" filled required />
-          </Field>
-
-          <Field label="E-mail" required>
-            <Input
-              name="email"
-              type="email"
-              placeholder="ivanivanov@mail.com"
-              filled
-              required
-            />
-          </Field>
-
-          <Field label="Телефон">
-            <Input name="phone" type="tel" placeholder="+375" filled />
-          </Field>
+          <Input
+            name="name"
+            label="Фамилия и Имя"
+            required
+            placeholder="Иванов Иван"
+            filled
+          />
+          <Input
+            name="email"
+            type="email"
+            label="E-mail"
+            required
+            placeholder="ivanivanov@mail.com"
+            filled
+          />
+          <Input name="phone" type="tel" label="Телефон" placeholder="+375" filled />
         </div>
 
-        <div className={styles.upload}>
-          <FileUpload name="resume" filled />
-          <span className={styles.hint}>
-            Поддерживаемые форматы: PDF, DOC, DOCX. Рекомендуемый размер — до 10 МБ.
-          </span>
-        </div>
+        <FileUpload
+          name="resume"
+          filled
+          required
+          hint="Поддерживаемые форматы: PDF, DOC, DOCX. Рекомендуемый размер — до 10 МБ."
+        />
 
         <div className={styles.captchaRow}>
-          <Field label={`Сколько будет ${captcha.a} + ${captcha.b}?`} required>
-            <Input
-              name="captcha"
-              inputMode="numeric"
-              value={answer}
-              onChange={(event) => setAnswer(event.target.value)}
-              filled
-              required
-            />
-          </Field>
+          <Input
+            name="captcha"
+            label={`Сколько будет ${captcha.a} + ${captcha.b}?`}
+            required
+            inputMode="numeric"
+            value={answer}
+            onChange={(event) => setAnswer(event.target.value)}
+            filled
+          />
 
-          <button className={styles.refresh} type="button" onClick={refresh}>
-            Обновить
-          </button>
+          <TextLink onClick={refresh}>Обновить</TextLink>
         </div>
 
         {error && <span className={styles.error}>{error}</span>}

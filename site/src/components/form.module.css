@@ -219,3 +219,78 @@
   border-color: transparent;
   background: var(--bg-muted);
 }
+
+/* Обвязка поля: подпись сверху, подсказка снизу — как в компоненте ДС. */
+.labelled,
+.uploadWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  min-width: 0;
+}
+
+.labelText {
+  color: var(--text-secondary);
+  font-size: var(--font-size-label-l);
+  font-weight: 500;
+}
+
+.required {
+  color: var(--text-error);
+}
+
+.hint {
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-s);
+}
+
+/* TextLink */
+.textLink {
+  align-self: flex-start;
+  min-height: var(--spacing-56);
+  padding-inline: var(--spacing-8);
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-m);
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+.textLink:hover {
+  color: var(--text-accent);
+}
+
+/* TemplateLink */
+.templateLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-16) var(--spacing-24);
+  border-radius: var(--radius-16);
+  background: var(--bg-accent-subtle);
+  color: var(--text-accent);
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.templateLabels {
+  display: flex;
+  flex-direction: column;
+}
+
+.templateTitle {
+  font-size: var(--font-size-label-l);
+  font-weight: 600;
+}
+
+.templateSubtitle {
+  color: var(--text-secondary);
+  font-size: var(--font-size-caption-m);
+}
+
+.templateLink:hover {
+  background: var(--action-primary);
+  color: var(--text-inverse);
+}
+
+.templateLink:hover .templateSubtitle {
+  color: var(--text-inverse);
+}

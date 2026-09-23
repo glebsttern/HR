@@ -2,22 +2,74 @@
 
 import { useId, useState } from "react";
 import type { InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes } from "react";
-import { IconChevronDown, IconUpload } from "./icons";
+import { IconChevronDown, IconDownload, IconUpload } from "./icons";
 import styles from "./form.module.css";
 
-type FieldStyle = { filled?: boolean };
+type FieldStyle = {
+  filled?: boolean;
+  /** Подпись и подсказка живут внутри поля — так же устроен компонент в ДС. */
+  label?: string;
+  required?: boolean;
+  hint?: string;
+};
 
-export function Input({ filled, ...props }: InputHTMLAttributes<HTMLInputElement> & FieldStyle) {
+/** Обвязка поля: подпись сверху, подсказка снизу. Общая для Input/Select/Textarea. */
+function Labelled({
+  label,
+  required,
+  hint,
+  children,
+}: FieldStyle & { children: React.ReactNode }) {
+  if (!label && !hint) return <>{children}</>;
+
   return (
-    <input
-      className={filled ? `${styles.field} ${styles.filled}` : styles.field}
-      {...props}
-    />
+    <label className={styles.labelled}>
+      {label && (
+        <span className={styles.labelText}>
+          {label}
+          {required && <span className={styles.required}>*</span>}
+        </span>
+      )}
+      {children}
+      {hint && <span className={styles.hint}>{hint}</span>}
+    </label>
   );
 }
 
-export function Textarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
-  return <textarea className={`${styles.field} ${styles.textarea}`} {...props} />;
+export function Input({
+  filled,
+  label,
+  required,
+  hint,
+  ...props
+}: InputHTMLAttributes<HTMLInputElement> & FieldStyle) {
+  return (
+    <Labelled label={label} required={required} hint={hint}>
+      <input
+        className={filled ? `${styles.field} ${styles.filled}` : styles.field}
+        required={required}
+        {...props}
+      />
+    </Labelled>
+  );
+}
+
+export function Textarea({
+  filled,
+  label,
+  required,
+  hint,
+  ...props
+}: TextareaHTMLAttributes<HTMLTextAreaElement> & FieldStyle) {
+  return (
+    <Labelled label={label} required={required} hint={hint}>
+      <textarea
+        className={`${styles.field} ${styles.textarea}${filled ? " " + styles.filled : ""}`}
+        required={required}
+        {...props}
+      />
+    </Labelled>
+  );
 }
 
 type SelectProps = SelectHTMLAttributes<HTMLSelectElement> &
@@ -35,6 +87,9 @@ export function Select({
   onChange,
   filled,
   plain,
+  label,
+  required,
+  hint,
   ...rest
 }: SelectProps) {
   // Без внешнего value поле живёт само по себе, с ним — подчиняется родителю.
@@ -42,6 +97,7 @@ export function Select({
   const current = value === undefined ? innerValue : String(value);
 
   return (
+    <Labelled label={label} required={required} hint={hint}>
     <span className={plain ? `${styles.selectWrap} ${styles.plainWrap}` : styles.selectWrap}>
       <select
         className={[
@@ -71,6 +127,7 @@ export function Select({
         <IconChevronDown size={20} />
       </span>
     </span>
+    </Labelled>
   );
 }
 
@@ -122,12 +179,14 @@ export function Checkbox({
 export function FileUpload({
   name,
   filled,
+  hint,
+  required,
 }: { name: string } & FieldStyle) {
   const id = useId();
   const [fileName, setFileName] = useState<string | null>(null);
 
   return (
-    <>
+    <span className={styles.uploadWrap}>
       <label
         className={filled ? `${styles.upload} ${styles.uploadFilled}` : styles.upload}
         htmlFor={id}
@@ -142,8 +201,43 @@ export function FileUpload({
         name={name}
         type="file"
         className={styles.visuallyHidden}
+        required={required}
         onChange={(event) => setFileName(event.target.files?.[0]?.name ?? null)}
       />
-    </>
+      {hint && <span className={styles.hint}>{hint}</span>}
+    </span>
+  );
+}
+
+/** Подчёркнутая текстовая ссылка — «Обновить» в капче. Компонент `TextLink` в ДС. */
+export function TextLink({
+  children,
+  ...props
+}: React.ButtonHTMLAttributes<HTMLButtonElement>) {
+  return (
+    <button className={styles.textLink} type="button" {...props}>
+      {children}
+    </button>
+  );
+}
+
+/** Плашка со скачиванием файла — компонент `TemplateLink` в ДС. */
+export function TemplateLink({
+  href,
+  title,
+  subtitle,
+}: {
+  href: string;
+  title: string;
+  subtitle: string;
+}) {
+  return (
+    <a className={styles.templateLink} href={href} download>
+      <IconDownload size={20} />
+      <span className={styles.templateLabels}>
+        <span className={styles.templateTitle}>{title}</span>
+        <span className={styles.templateSubtitle}>{subtitle}</span>
+      </span>
+    </a>
   );
 }

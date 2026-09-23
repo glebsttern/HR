@@ -88,6 +88,8 @@
 
   /* типографика */
   --font-family-primary: var(--font-inter), "Inter", system-ui, sans-serif;
+  /* Крупные размеры (Display XL/L/M, H1–H5) набираются акцидентным Onder. */
+  --font-family-display: "Onder", var(--font-family-primary);
 
   --font-size-display-xl: 80px;
   --font-size-display-l: 64px;

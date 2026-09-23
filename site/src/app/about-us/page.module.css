@@ -11,9 +11,10 @@
 }
 
 .title {
+  font-family: var(--font-family-display);
   font-size: var(--font-size-display-l);
-  font-weight: 700;
-  line-height: var(--line-height-snug);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
 }
 
 .lead {
@@ -47,10 +48,11 @@
 }
 
 .factValue {
+  font-family: var(--font-family-display);
   color: var(--text-accent);
   font-size: var(--font-size-display-m);
-  font-weight: 700;
-  line-height: var(--line-height-tight);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
 }
 
 .factCaption {
@@ -81,9 +83,10 @@
 }
 
 .blockTitle {
+  font-family: var(--font-family-display);
   font-size: var(--font-size-display-m);
-  font-weight: 700;
-  line-height: var(--line-height-snug);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
 }
 
 /* плюшки */
@@ -111,8 +114,9 @@
 }
 
 .perkTitle {
+  font-family: var(--font-family-display);
   font-size: var(--font-size-h3);
-  font-weight: 700;
+  font-weight: 400;
 }
 
 .perkSummary {
@@ -147,9 +151,10 @@
 }
 
 .ctaTitle {
+  font-family: var(--font-family-display);
   font-size: var(--font-size-display-m);
-  font-weight: 700;
-  line-height: var(--line-height-snug);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
 }
 
 .ctaActions {

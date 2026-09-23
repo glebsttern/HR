@@ -16,10 +16,11 @@
 }
 
 .title {
+  font-family: var(--font-family-display);
   color: var(--card-title);
   font-size: var(--font-size-h2);
-  font-weight: 700;
-  line-height: var(--line-height-snug);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
 }
 
 .description {

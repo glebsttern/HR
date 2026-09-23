@@ -12,17 +12,17 @@
   align-items: center;
   gap: var(--spacing-24);
   width: 100%;
-  max-width: var(--content-width);
+  max-width: 1160px;
   margin: 0 auto;
   text-align: center;
 }
 
 .heading {
   font-family: var(--font-family-display);
-  font-size: clamp(2rem, 4vw, var(--font-size-display-l));
+  font-size: clamp(2.25rem, 5vw, var(--font-size-display-l));
   font-weight: 400;
-  line-height: var(--line-height-normal);
-  letter-spacing: -0.01em;
+  line-height: var(--line-height-display);
+  letter-spacing: -0.025em;
   text-wrap: balance;
 }
 

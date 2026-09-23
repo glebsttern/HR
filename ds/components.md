@@ -70,7 +70,7 @@
 | `Badge` | ComponentSet | `89:21` | `Variant: Hot\|New` | Card | Статус-бейдж вакансии |
 | `Avatar` | ComponentSet | `89:27` | `Variant: Initials\|IconFallback\|Photo` × `Background: Pink\|Blue\|Purple\|Mint\|Amber` — 15 вариантов | AvatarGroup | Круглый аватар 48. Фон — токены `avatar/bg-*` (→ `bg/avatar-*` → `pastel/*-100`, заведены 2026-09-24). `Photo` — заглушка-заливка: фото ставится через Fill → Image на самом инстансе |
 | `AvatarGroup` | Component | `184:115` | — | — | Пять `Avatar` внахлёст (−12), белая обводка 3 на `bg/surface`. Элемент хиро whitesnake.by |
-| `Rating` | ComponentSet | `181:184` | `Value: 1\|2\|3\|4\|5` | — | Звёзды 24 из HR Icons (`li:star`), заполненные — `text/warning`, пустые — `neutral/300`. ⚠️ Звёзды контурные: залитой в HR Icons не было — добавил `hr:star-filled` в HR Icons, после публикации HR Icons заменить |
+| `Rating` | ComponentSet | `181:184` | `Value: 1\|2\|3\|4\|5` | — | Звёзды 24 — залитые `hr:star-filled` из HR Icons (добавлена 2026-09-24), заполненные — `text/warning`, пустые — `neutral/300` |
 | `PaginationItem` | ComponentSet | `89:32` | `Variant: Default\|Active` | PaginationExample | Элемент пагинации |
 | `PaginationExample` | Frame | `89:33` | — | — | Собранный пример пагинации, **не мастер-компонент** |
 

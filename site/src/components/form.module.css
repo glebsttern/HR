@@ -174,3 +174,48 @@
   white-space: nowrap;
   border: 0;
 }
+
+/* Вид «как в анкете на job.softclub.by»: заливка без рамки, подпись сверху. */
+.filled {
+  border-color: transparent;
+  background: var(--bg-muted);
+}
+
+.filled:hover:not(:disabled) {
+  border-color: var(--input-border-hover);
+}
+
+/* Селект строкой, без плашки — для выбора вакансии под заголовком. */
+.plainWrap {
+  width: auto;
+}
+
+.plain {
+  width: auto;
+  height: auto;
+  padding: 0 var(--spacing-32) 0 0;
+  border-color: transparent;
+  background: none;
+  color: var(--text-primary);
+  font-size: var(--font-size-h3);
+  font-weight: 600;
+}
+
+.plain:hover:not(:disabled) {
+  border-color: transparent;
+  color: var(--text-accent);
+}
+
+.plainWrap .selectIcon {
+  right: 0;
+  color: var(--text-primary);
+}
+
+/* Зона загрузки одной строкой, как у оригинала. */
+.uploadFilled {
+  flex-direction: row;
+  min-height: 72px;
+  border-style: solid;
+  border-color: transparent;
+  background: var(--bg-muted);
+}

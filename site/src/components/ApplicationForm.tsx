@@ -14,7 +14,8 @@ function newCaptcha() {
   return { a: 1 + Math.floor(Math.random() * 9), b: 1 + Math.floor(Math.random() * 9) };
 }
 
-function Row({
+/** Подпись над полем — так устроена анкета у оригинала. */
+function Field({
   label,
   required,
   children,
@@ -24,13 +25,13 @@ function Row({
   children: React.ReactNode;
 }) {
   return (
-    <div className={styles.row}>
+    <label className={styles.field}>
       <span className={styles.label}>
         {label}
         {required && <span className={styles.required}>*</span>}
       </span>
-      <div className={styles.control}>{children}</div>
-    </div>
+      {children}
+    </label>
   );
 }
 
@@ -52,7 +53,7 @@ export function ApplicationForm() {
   return (
     <section className={styles.section} id="apply">
       <form
-        className={styles.inner}
+        className={styles.card}
         onSubmit={(event) => {
           event.preventDefault();
 
@@ -67,105 +68,106 @@ export function ApplicationForm() {
         }}
       >
         <div className={styles.head}>
-          <h2 className={styles.title}>Отправить резюме</h2>
+          <div className={styles.headLeft}>
+            <h2 className={styles.title}>Отправить резюме</h2>
+
+            <Select
+              name="vacancy"
+              placeholder="Выберите вакансию"
+              options={VACANCIES.map((vacancy) => vacancy.title)}
+              aria-label="Вакансия"
+              plain
+              required
+            />
+          </div>
 
           <a className={styles.template} href={TEMPLATE_URL} download>
             <IconDownload size={20} />
-            Скачать шаблон анкеты
+            <span>
+              Скачать
+              <span className={styles.templateSub}>шаблон анкеты</span>
+            </span>
           </a>
         </div>
 
-        <Row label="Вакансия" required>
-          <Select
-            name="vacancy"
-            placeholder="Выберите вакансию"
-            options={VACANCIES.map((vacancy) => vacancy.title)}
-            aria-label="Вакансия"
-            required
-          />
-        </Row>
+        <div className={styles.row}>
+          <Field label="Фамилия и Имя" required>
+            <Input name="name" placeholder="Иванов Иван" filled required />
+          </Field>
 
-        <Row label="Фамилия и Имя" required>
-          <Input
-            name="name"
-            placeholder="Иванов Иван"
-            aria-label="Фамилия и Имя"
-            required
-          />
-        </Row>
+          <Field label="E-mail" required>
+            <Input
+              name="email"
+              type="email"
+              placeholder="ivanivanov@mail.com"
+              filled
+              required
+            />
+          </Field>
 
-        <Row label="E-mail" required>
-          <Input
-            name="email"
-            type="email"
-            placeholder="Например: ivanivanov@mail.com"
-            aria-label="E-mail"
-            required
-          />
-        </Row>
+          <Field label="Телефон">
+            <Input name="phone" type="tel" placeholder="+375" filled />
+          </Field>
+        </div>
 
-        <Row label="Телефон">
-          <Input name="phone" type="tel" placeholder="+375" aria-label="Телефон" />
-        </Row>
-
-        <Row label="Резюме" required>
-          <FileUpload name="resume" />
+        <div className={styles.upload}>
+          <FileUpload name="resume" filled />
           <span className={styles.hint}>
             Поддерживаемые форматы: PDF, DOC, DOCX. Рекомендуемый размер — до 10 МБ.
           </span>
-        </Row>
+        </div>
 
-        <Row label={`Сколько будет ${captcha.a} + ${captcha.b}?`} required>
-          <div className={styles.captcha}>
+        <div className={styles.captchaRow}>
+          <Field label={`Сколько будет ${captcha.a} + ${captcha.b}?`} required>
             <Input
               name="captcha"
               inputMode="numeric"
-              aria-label="Ответ на пример"
               value={answer}
               onChange={(event) => setAnswer(event.target.value)}
+              filled
               required
             />
-            <button className={styles.refresh} type="button" onClick={refresh}>
-              Обновить
-            </button>
-          </div>
-          {error && <span className={styles.error}>{error}</span>}
-        </Row>
+          </Field>
 
-        <div className={styles.actions}>
-          <span />
-          <div className={styles.actionsInner}>
-            <Checkbox
-              name="consent"
-              required
-              small
-              label={
-                <>
-                  Я даю{" "}
-                  <a
-                    className={styles.consentLink}
-                    href="https://job.softclub.by/resume"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    согласие на обработку моих персональных данных в целях
-                    рассмотрения резюме
-                  </a>
-                </>
-              }
-            />
-            <Button type="submit" variant="primary" size="large">
-              Отправить
-            </Button>
-
-            {sent && (
-              <p className={styles.sent} role="status">
-                Спасибо, анкета заполнена. Отправка пока не подключена — форма
-                ждёт реального адреса получателя.
-              </p>
-            )}
-          </div>
+          <button className={styles.refresh} type="button" onClick={refresh}>
+            Обновить
+          </button>
         </div>
+
+        {error && <span className={styles.error}>{error}</span>}
+
+        <div className={styles.footer}>
+          <Checkbox
+            name="consent"
+            required
+            small
+            label={
+              <>
+                Я даю{" "}
+                <a
+                  className={styles.consentLink}
+                  href="https://job.softclub.by/resume"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  согласие на обработку моих персональных данных в целях
+                  рассмотрения резюме
+                </a>
+              </>
+            }
+          />
+
+          <Button type="submit" variant="primary" size="large">
+            Отправить
+          </Button>
+        </div>
+
+        {sent && (
+          <p className={styles.sent} role="status">
+            Спасибо, анкета заполнена. Отправка пока не подключена — форма ждёт
+            реального адреса получателя.
+          </p>
+        )}
       </form>
     </section>
   );

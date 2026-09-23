@@ -5,24 +5,36 @@ import type { InputHTMLAttributes, SelectHTMLAttributes, TextareaHTMLAttributes 
 import { IconChevronDown, IconUpload } from "./icons";
 import styles from "./form.module.css";
 
-export function Input(props: InputHTMLAttributes<HTMLInputElement>) {
-  return <input className={styles.field} {...props} />;
+type FieldStyle = { filled?: boolean };
+
+export function Input({ filled, ...props }: InputHTMLAttributes<HTMLInputElement> & FieldStyle) {
+  return (
+    <input
+      className={filled ? `${styles.field} ${styles.filled}` : styles.field}
+      {...props}
+    />
+  );
 }
 
 export function Textarea(props: TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return <textarea className={`${styles.field} ${styles.textarea}`} {...props} />;
 }
 
-type SelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
-  placeholder: string;
-  options: string[];
-};
+type SelectProps = SelectHTMLAttributes<HTMLSelectElement> &
+  FieldStyle & {
+    placeholder: string;
+    options: string[];
+    /** Селект без плашки — крупной строкой, как у заголовка анкеты. */
+    plain?: boolean;
+  };
 
 export function Select({
   placeholder,
   options,
   value,
   onChange,
+  filled,
+  plain,
   ...rest
 }: SelectProps) {
   // Без внешнего value поле живёт само по себе, с ним — подчиняется родителю.
@@ -30,9 +42,16 @@ export function Select({
   const current = value === undefined ? innerValue : String(value);
 
   return (
-    <span className={styles.selectWrap}>
+    <span className={plain ? `${styles.selectWrap} ${styles.plainWrap}` : styles.selectWrap}>
       <select
-        className={`${styles.field} ${styles.select}`}
+        className={[
+          styles.field,
+          styles.select,
+          filled ? styles.filled : null,
+          plain ? styles.plain : null,
+        ]
+          .filter(Boolean)
+          .join(" ")}
         value={current}
         data-placeholder={current === ""}
         onChange={(event) => {
@@ -100,13 +119,19 @@ export function Checkbox({
   );
 }
 
-export function FileUpload({ name }: { name: string }) {
+export function FileUpload({
+  name,
+  filled,
+}: { name: string } & FieldStyle) {
   const id = useId();
   const [fileName, setFileName] = useState<string | null>(null);
 
   return (
     <>
-      <label className={styles.upload} htmlFor={id}>
+      <label
+        className={filled ? `${styles.upload} ${styles.uploadFilled}` : styles.upload}
+        htmlFor={id}
+      >
         <span className={styles.uploadIcon}>
           <IconUpload size={24} />
         </span>

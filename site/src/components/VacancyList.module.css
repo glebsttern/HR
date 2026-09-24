@@ -1,5 +1,6 @@
 .section {
-  padding: var(--spacing-80) var(--page-gutter);
+  /* Сверху отступ даёт обёртка списка — она же полоска над Хиро. */
+  padding: 0 var(--page-gutter) var(--spacing-80);
 }
 
 .inner {

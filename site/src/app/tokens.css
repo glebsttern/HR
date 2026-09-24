@@ -73,6 +73,7 @@
 
   --black-overlay-10: rgba(0, 0, 0, 0.1);
   --black-overlay-40: rgba(0, 0, 0, 0.4);
+  --white-overlay-20: rgba(255, 255, 255, 0.2);
   --white-overlay-80: rgba(255, 255, 255, 0.8);
   --blue-border-light: #e1e2fb;
 
@@ -134,8 +135,8 @@
   --line-height-tight: 1;
   --line-height-snug: 1.1;
   --line-height-normal: 1.3;
-  /* У Onder большие вертикальные выносы: на 1.2 строки налезают, держим 1.3 */
-  --line-height-display: 1.3;
+  /* Как в стиле библиотеки DS/Display/Display-L: строка 2.05 от кегля */
+  --line-height-display: 2.05;
   --line-height-relaxed: 1.4;
   --line-height-loose: 1.6;
 
@@ -144,6 +145,12 @@
   --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.16);
   --shadow-search: 0 4px 9px rgba(0, 0, 0, 0.04);
   --blur-glass: 20px;
+  /*
+   * Готовое значение блюра отдельной строкой. Нужно потому, что сборщик стилей
+   * оставляет от backdrop-filter только префиксную запись -webkit-, а её свежий
+   * Chrome уже не понимает. Поэтому блюр ставится инлайном в компоненте.
+   */
+  --filter-blur-glass: blur(20px);
 
   /* ---------------------------------------------------------------- */
   /* Слой 2 — семантика (только алиасы примитивов)                     */
@@ -171,6 +178,7 @@
   --bg-muted-hover: var(--neutral-200);
   --bg-accent-subtle: var(--green-50);
   --bg-glass: var(--white-overlay-80);
+  --bg-glass-soft: var(--white-overlay-20);
   --bg-input: var(--neutral-0);
   --bg-input-disabled: var(--neutral-200);
 

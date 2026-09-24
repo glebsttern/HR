@@ -1,11 +1,13 @@
 .header {
-  position: sticky;
+  /* Шапка лежит поверх встречающего экрана, как в макете, и не занимает высоту. */
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 10;
   padding: var(--spacing-16) var(--page-gutter);
   background: var(--header-bg-glass);
-  backdrop-filter: blur(var(--blur-glass));
-  -webkit-backdrop-filter: blur(var(--blur-glass));
+  /* backdrop-filter — инлайном в Header.tsx, см. комментарий у --filter-blur-* */
 }
 
 .inner {

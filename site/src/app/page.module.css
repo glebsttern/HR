@@ -1,0 +1,42 @@
+.page {
+  /* Сколько списка торчит над Хиро в покое — и до того, как он подтянулся. */
+  --list-peek: 48px;
+  --list-peek-start: 24px;
+
+  position: relative;
+}
+
+/*
+ * Список лежит поверх Хиро и в покое выглядывает снизу узкой полоской: видно
+ * край блока и чуть-чуть надпись. Дальше он едет вверх обычным потоком, а Хиро
+ * под ним прилипает — получается, что список наползает на встречающий экран.
+ * Фон полупрозрачный с блюром, поэтому Хиро под ним угадывается, а не пропадает.
+ */
+.list {
+  position: relative;
+  z-index: 1;
+  margin-top: calc(-1 * var(--list-peek));
+  /* Столько от верха панели до заголовка: в полоску 48 попадает его край. */
+  padding-top: var(--spacing-32);
+  border-radius: var(--radius-24) var(--radius-24) 0 0;
+  background: var(--bg-glass-soft);
+  box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.08);
+  animation: listUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) 1.4s backwards;
+}
+
+@keyframes listUp {
+  from {
+    transform: translateY(calc(var(--list-peek) - var(--list-peek-start)));
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .list {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms;
+  }
+}

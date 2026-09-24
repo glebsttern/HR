@@ -1,54 +1,38 @@
-import type { Sticker as StickerData } from "@/data/stickers";
+import Image from "next/image";
+import type { HeroSticker } from "@/data/hero";
 import styles from "./Sticker.module.css";
 
-export function Sticker({
-  sticker,
-  className,
-  style,
-}: {
-  sticker: StickerData;
-  className?: string;
-  style?: React.CSSProperties;
-}) {
-  const classes = [styles.sticker, className].filter(Boolean).join(" ");
-
-  if (sticker.kind === "stat") {
+/**
+ * Стикер встречающего экрана — компонент Sticker из HR Library.
+ * Три вида: кружок с эмодзи, кружок с фото человека, акцентная надпись без кружка.
+ */
+export function Sticker({ sticker }: { sticker: HeroSticker }) {
+  if (sticker.kind === "accent") {
     return (
-      <div className={classes} style={style}>
-        <span className={styles.value}>{sticker.value}</span>
-        <span className={styles.caption}>{sticker.caption}</span>
-      </div>
-    );
-  }
-
-  if (sticker.kind === "status") {
-    return (
-      <div className={classes} style={style}>
-        <span className={styles.label}>
-          <span className={styles.dot} aria-hidden />
-          {sticker.label}
-        </span>
-        <span className={styles.message}>{sticker.text}</span>
-      </div>
-    );
-  }
-
-  if (sticker.kind === "person") {
-    return (
-      <div className={`${classes} ${styles.withAvatar}`} style={style}>
-        <span className={styles.avatar}>{sticker.initials}</span>
-        <span className={styles.body}>
-          <span className={styles.label}>{sticker.label}</span>
-          <span className={styles.message}>{sticker.text}</span>
-        </span>
+      <div className={styles.sticker}>
+        <div className={styles.column}>
+          <span className={styles.title}>{sticker.title}</span>
+          <span className={styles.text}>{sticker.text}</span>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className={classes} style={style}>
-      <span className={styles.label}>{sticker.label}</span>
-      <span className={styles.message}>{sticker.text}</span>
+    <div className={styles.sticker}>
+      {sticker.kind === "emoji" ? (
+        <span className={styles.avatar} data-tone={sticker.tone}>
+          <Image className={styles.emoji} src={sticker.emoji} alt="" width={72} height={72} />
+        </span>
+      ) : (
+        <span className={styles.avatar}>
+          <Image className={styles.photo} src={sticker.photo} alt="" width={72} height={72} />
+        </span>
+      )}
+      <div className={styles.column}>
+        <span className={styles.label}>{sticker.label}</span>
+        <span className={styles.text}>{sticker.text}</span>
+      </div>
     </div>
   );
 }

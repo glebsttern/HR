@@ -41,6 +41,7 @@
 | `black/overlay-10` | `#000000 a0.10` | — |
 | `black/overlay-40` | `#000000 a0.40` | — |
 | `white/overlay-80` | `#ffffff a0.80` | добавлен 2026-09-17 — под «стеклянную» шапку, по аналогии с `black/overlay-*` |
+| `white/overlay-20` | `#ffffff a0.20` | добавлен 2026-09-24 — под панель списка вакансий, которая наползает на Хиро |
 | `blue/border-light` | `#e1e2fb` | — |
 | `success/400` | `#51f08c` | добавлен 2026-09-17 |
 | `success/500` | `#33e674` | добавлен 2026-09-17 |
@@ -110,6 +111,7 @@ Variables для теней в файле нет (ни в одной из 6 ко
 | `bg/muted-hover` | → `neutral/200` | → `neutral/600` |
 | `bg/accent-subtle` | → `green/50` | → `green/700` |
 | `bg/glass` | → `white/overlay-80` | → `black/overlay-40` |
+| `bg/glass-soft` | → `white/overlay-20` | → `black/overlay-10` |
 | `text/success` | → `success/500` | → `success/400` |
 | `border/success` | → `success/500` | → `success/400` |
 | `text/warning` | → `warning/500` | → `warning/400` |

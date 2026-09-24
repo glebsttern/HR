@@ -1,77 +1,87 @@
 .sticker {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-8);
-  width: 220px;
-  padding: var(--spacing-16);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  padding: var(--spacing-12) var(--spacing-16);
   border-radius: var(--radius-16);
   background: var(--card-bg);
   box-shadow: var(--shadow-card);
-  text-align: left;
-}
-
-.withAvatar {
-  flex-direction: row;
-  align-items: center;
-  gap: var(--spacing-12);
-}
-
-.value {
-  font-family: var(--font-family-display);
-  color: var(--text-accent);
-  font-size: var(--font-size-h2);
-  font-weight: 400;
-  line-height: var(--line-height-normal);
-}
-
-.caption {
-  color: var(--text-secondary);
-  font-size: var(--font-size-body-s);
-  font-weight: 500;
-  line-height: var(--line-height-normal);
 }
 
 .avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex: none;
-  width: 40px;
-  height: 40px;
+  flex-shrink: 0;
+  /* 72 — как в компоненте Sticker; отдельной переменной на 72 в библиотеке нет */
+  width: calc(var(--spacing-64) + var(--spacing-8));
+  height: calc(var(--spacing-64) + var(--spacing-8));
   border-radius: var(--radius-full);
-  background: var(--bg-muted);
-  color: var(--text-secondary);
-  font-size: var(--font-size-caption-m);
-  font-weight: 600;
+  overflow: hidden;
 }
 
-.body {
+.avatar[data-tone="pink"] {
+  background: var(--tone-pink-bg);
+  border: 1px solid var(--tone-pink-border);
+}
+
+.avatar[data-tone="blue"] {
+  background: var(--tone-blue-bg);
+  border: 1px solid var(--tone-blue-border);
+}
+
+.avatar[data-tone="purple"] {
+  background: var(--tone-purple-bg);
+  border: 1px solid var(--tone-purple-border);
+}
+
+.avatar[data-tone="mint"] {
+  background: var(--tone-mint-bg);
+  border: 1px solid var(--tone-mint-border);
+}
+
+.avatar[data-tone="amber"] {
+  background: var(--tone-amber-bg);
+  border: 1px solid var(--tone-amber-border);
+}
+
+.emoji {
+  width: 70%;
+  height: auto;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.column {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
-  min-width: 0;
 }
 
 .label {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-8);
   color: var(--text-secondary);
   font-size: var(--font-size-caption-m);
-  font-weight: 600;
-  line-height: var(--line-height-tight);
+  line-height: var(--line-height-relaxed);
+  white-space: nowrap;
 }
 
-.dot {
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-full);
-  background: var(--text-accent);
-}
-
-.message {
+.text {
   color: var(--text-primary);
   font-size: var(--font-size-body-s);
-  font-weight: 500;
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-loose);
+  white-space: nowrap;
+}
+
+.title {
+  color: var(--text-accent);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-display);
+  letter-spacing: -0.005em;
+  /* Переносы стоят в тексте вручную — там же, где в макете. */
+  white-space: pre;
 }

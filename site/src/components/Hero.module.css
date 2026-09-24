@@ -1,127 +1,197 @@
+/*
+ * Встречающий экран собран как кадр макета 1920×1080: всё внутри стоит на своих
+ * пиксельных координатах из Figma, а сам кадр целиком масштабируется под окно
+ * множителем --k (его считает Hero.tsx). Поэтому надпись, фото и стикеры всегда
+ * сомасштабны друг другу и макету — меняется только общий размер.
+ *
+ * Экран прилипает к верху, а список ниже наползает на него. Сколько уже наползло,
+ * знает --p (0 → 1): по ней текст уменьшается, медиа сжимается, стикеры
+ * разъезжаются по краям.
+ */
 .hero {
-  position: relative;
-  display: flex;
-  align-items: center;
-  min-height: 380px;
-  padding: var(--spacing-64) var(--page-gutter) var(--spacing-48);
+  --p: 0;
+
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  height: calc(1080px * var(--k, 1));
+  overflow: hidden;
 }
 
-.inner {
+.frame {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1920px;
+  height: 1080px;
+  margin-left: -960px;
+  transform: scale(var(--k, 1));
+  transform-origin: top center;
+}
+
+/* Цветной круг: вырастает из того края кадра, к которому прижат. */
+.circle {
+  position: absolute;
+  border-radius: var(--radius-full);
+  opacity: 0;
+  transform: scale(0.2);
+  animation: circleIn 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.32s forwards;
+}
+
+.circle[data-tone="mint"] {
+  background: var(--tone-mint-bg);
+}
+
+.circle[data-tone="purple"] {
+  background: var(--tone-purple-bg);
+}
+
+.circle[data-tone="amber"] {
+  background: var(--tone-amber-bg);
+}
+
+.circle[data-tone="blue"] {
+  background: var(--tone-blue-bg);
+}
+
+.circle[data-tone="pink"] {
+  background: var(--tone-pink-bg);
+}
+
+@keyframes circleIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Фотография или предмет. Человек сжимается от нижнего угла, предмет — от центра. */
+.media {
+  position: absolute;
+  opacity: 0;
+  animation: mediaIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.65s forwards;
+}
+
+.media[data-kind="person"] {
+  transform-origin: left bottom;
+  transform: scale(calc(1 - (1 - var(--shrink)) * var(--p)));
+}
+
+.media[data-kind="object"] {
+  transform-origin: center center;
+  transform: scale(calc(1 - (1 - var(--shrink)) * var(--p)));
+}
+
+.mediaImage {
+  object-fit: contain;
+}
+
+@keyframes mediaIn {
+  from {
+    opacity: 0;
+    translate: 0 var(--spacing-40);
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+/* Надпись и кнопки — появляются первыми, «всплывая» вперёд. */
+.content {
+  position: absolute;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--spacing-24);
-  width: 100%;
-  max-width: 1160px;
-  margin: 0 auto;
   text-align: center;
+  transform: scale(calc(1 - 0.26 * var(--p)));
+  opacity: 0;
+  animation: contentIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes contentIn {
+  from {
+    opacity: 0;
+    scale: 0.93;
+  }
+
+  to {
+    opacity: 1;
+    scale: 1;
+  }
 }
 
 .heading {
   font-family: var(--font-family-display);
-  font-size: clamp(2.25rem, 5vw, var(--font-size-display-l));
+  font-size: var(--font-size-display-l);
   font-weight: 400;
   line-height: var(--line-height-display);
-  letter-spacing: -0.025em;
-  text-wrap: balance;
+  letter-spacing: -0.0625em;
+}
+
+.accent {
+  color: var(--text-accent);
 }
 
 .tagline {
   color: var(--text-secondary);
-  font-size: var(--font-size-h3);
-  font-weight: 500;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-loose);
 }
 
 .actions {
   display: flex;
   justify-content: center;
   gap: var(--spacing-16);
-  flex-wrap: wrap;
 }
 
-/* Стикеры лежат на полях слева и справа от текста — в четырёх фиксированных
-   местах. Какие именно стикеры и в какие места лягут, решает клиент при
-   загрузке, поэтому набор меняется от перезагрузки к перезагрузке. */
-.stickers {
+/*
+ * Стикеры и карточка. Ставятся центром в точку из макета — они наклонены и
+ * увеличены, от угла встали бы мимо. Когда снизу наползает список, разъезжаются
+ * каждый в свою сторону.
+ */
+.anchor {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
+  z-index: 2;
+  transform: translate(-50%, -50%)
+    translate(calc(var(--away-x) * var(--p)), calc(var(--away-y) * var(--p)));
 }
 
-.sticker {
-  position: absolute;
+.floating {
   opacity: 0;
-  transform: rotate(var(--tilt)) translateY(12px) scale(0.96);
-  animation: drop 0.45s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: rotate(var(--rotate)) scale(var(--scale));
+  animation: floatIn 0.52s cubic-bezier(0.22, 1, 0.36, 1) var(--delay) forwards;
 }
 
-@keyframes drop {
+@keyframes floatIn {
+  from {
+    opacity: 0;
+    translate: 0 var(--spacing-16);
+    scale: 0.92;
+  }
+
   to {
     opacity: 1;
-    transform: rotate(var(--tilt)) translateY(0) scale(1);
+    translate: 0 0;
+    scale: 1;
   }
-}
-
-.leftTop {
-  --tilt: -5deg;
-  top: var(--spacing-32);
-  left: var(--page-gutter);
-}
-
-.leftBottom {
-  --tilt: -3deg;
-  bottom: var(--spacing-32);
-  left: calc(var(--page-gutter) + var(--spacing-32));
-}
-
-.rightTop {
-  --tilt: 4deg;
-  top: var(--spacing-32);
-  right: var(--page-gutter);
-}
-
-.rightBottom {
-  --tilt: 6deg;
-  bottom: var(--spacing-32);
-  right: calc(var(--page-gutter) + var(--spacing-32));
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sticker {
+  .circle,
+  .media,
+  .content,
+  .floating {
     animation-duration: 0.01ms;
-    animation-delay: 0ms !important;
-  }
-}
-
-@media (max-width: 1500px) {
-  .stickers {
-    display: none;
-  }
-}
-
-@media (max-width: 900px) {
-  .hero {
-    padding: var(--spacing-64) var(--spacing-24) var(--spacing-64);
+    animation-delay: 0ms;
   }
 
-  .inner {
-    gap: var(--spacing-32);
-  }
-}
-
-@media (max-width: 600px) {
-  .hero {
-    min-height: 0;
-    padding: var(--spacing-40) var(--spacing-24) var(--spacing-32);
-  }
-
-  .tagline {
-    font-size: var(--font-size-body-l);
-  }
-
-  .actions {
-    width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+  .content,
+  .media,
+  .floating {
+    transform: rotate(var(--rotate, 0deg)) scale(var(--scale, 1));
   }
 }

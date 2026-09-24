@@ -28,7 +28,10 @@ export function Header() {
       : pathname.startsWith(href);
 
   return (
-    <header className={styles.header}>
+    <header
+      className={styles.header}
+      style={{ backdropFilter: "var(--filter-blur-glass)" }}
+    >
       <div className={styles.inner}>
         <Link href="/" aria-label="SoftClub — на главную">
           <Logo height={44} />

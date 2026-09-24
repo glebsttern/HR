@@ -39,10 +39,10 @@
   align-items: center;
   gap: var(--spacing-4);
   padding: var(--spacing-4) var(--spacing-12);
-  border: 1px solid var(--tag-border);
+  border: 1px solid var(--tone-default-border);
   border-radius: var(--radius-full);
-  background: var(--tag-bg);
-  color: var(--tag-text);
+  background: var(--tone-default-bg);
+  color: var(--tone-default-text);
   font-size: var(--font-size-tag);
   font-weight: 600;
 }

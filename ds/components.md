@@ -64,11 +64,13 @@
 | `Sticky` | ComponentSet | `103:70` | `State: Default\|Hover` | — | Плашка-достижение, `IconRibbon`. ⚠️ Назначение уточняется: https://www.figma.com/design/UPfefWk5FHbm4ljnfzeJrr/HR-Library?node-id=103-70 |
 
 ## Data
+
+**Общая шкала тонов** `tone/{default|accent|pink|blue|purple|mint|amber}/{bg|text|border}` (20 токенов, Components) — одна на `Tag`, `Badge`, `Avatar`. Default: белый, тёмный текст, серая рамка `border/default`. Accent: зелёный, белый текст, без рамки. Цветные: фон `pastel/*-200`, текст `pastel/*-800` (контраст 4.5–4.8:1), рамка `pastel/*-300` (на 10% темнее фона). Новый цвет добавляется один раз — сразу у всех трёх.
 | Имя | Тип | Node ID | Матрица | Used in | Назначение |
 |-----|-----|---------|---------|---------|------------|
-| `Tag` | ComponentSet | `89:16` | `Variant: Default\|Active` | Card | Тег/фильтр-чип |
-| `Badge` | ComponentSet | `89:21` | `Variant: Hot\|New` | Card | Статус-бейдж вакансии |
-| `Avatar` | ComponentSet | `89:27` | `Variant: Initials\|IconFallback\|Photo` × `Background: Pink\|Blue\|Purple\|Mint\|Amber` — 15 вариантов | AvatarGroup | Круглый аватар 48. Фон — `avatar/bg-*` → `bg/avatar-*` → `pastel/*-200`; инициалы и иконка — `avatar/text-*` → `text/avatar-*` → `pastel/*-800` (тёмный оттенок того же цвета, контраст 5.5–5.8:1). Обновлено 2026-09-24. `Photo` — заглушка-заливка: фото ставится через Fill → Image на самом инстансе |
+| `Tag` | ComponentSet | `89:16` | `Tone: Default|Accent|Pink|Blue|Purple|Mint|Amber` — 7 вариантов | Card, VacancyCard | Тег/чип. Цвета из общей шкалы `tone/*` (было `Variant: Default|Active` → Default/Accent) |
+| `Badge` | ComponentSet | `89:21` | `Tone` — те же 7 | Card | Бейдж. Смысл («Горячая», «Новая») — в тексте, цвет — `tone/*` (было `Variant: Hot|New`) |
+| `Avatar` | ComponentSet | `89:27` | `Variant: Initials|IconFallback|Photo` × `Tone` (7) — 21 вариант | AvatarGroup | Круглый аватар 48. Цвета `tone/*`. `Photo` — фото через Fill → Image |
 | `AvatarGroup` | Component | `184:115` | — | — | Пять `Avatar` внахлёст (−12), белая обводка 3 на `bg/surface`. Элемент хиро whitesnake.by |
 | `Rating` | ComponentSet | `181:184` | `Value: 1\|2\|3\|4\|5` | — | Звёзды 24 — залитые `hr:star-filled` из HR Icons (добавлена 2026-09-24), заполненные — `text/warning`, пустые — `neutral/300` |
 | `PaginationItem` | ComponentSet | `89:32` | `Variant: Default\|Active` | PaginationExample | Элемент пагинации |

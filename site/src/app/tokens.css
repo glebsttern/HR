@@ -29,8 +29,26 @@
   --green-50: #e7f3ec;
   --green-400: #0cb65e;
   --green-500: #008c44;
+
   --green-600: #006632;
   --green-700: #004220;
+
+  /* пастели тонов (Tag / Badge / Avatar): 200 фон, 300 рамка, 800 текст */
+  --pastel-pink-200: #FFB8C8;
+  --pastel-pink-300: #E6A6B4;
+  --pastel-pink-800: #A3123F;
+  --pastel-blue-200: #A8C8FF;
+  --pastel-blue-300: #97B4E6;
+  --pastel-blue-800: #1745C0;
+  --pastel-purple-200: #D3B3FF;
+  --pastel-purple-300: #BEA1E6;
+  --pastel-purple-800: #6A1BC4;
+  --pastel-mint-200: #96E8C6;
+  --pastel-mint-300: #87D1B2;
+  --pastel-mint-800: #036B4B;
+  --pastel-amber-200: #FFD27A;
+  --pastel-amber-300: #E6BD6E;
+  --pastel-amber-800: #8A4B00;
 
   /* красный остался под error-состояния */
   --red-400: #f05252;
@@ -133,6 +151,21 @@
 
   --bg-page: var(--neutral-100);
   --bg-surface: var(--neutral-0);
+  --bg-avatar-pink: var(--pastel-pink-200);
+  --border-avatar-pink: var(--pastel-pink-300);
+  --text-avatar-pink: var(--pastel-pink-800);
+  --bg-avatar-blue: var(--pastel-blue-200);
+  --border-avatar-blue: var(--pastel-blue-300);
+  --text-avatar-blue: var(--pastel-blue-800);
+  --bg-avatar-purple: var(--pastel-purple-200);
+  --border-avatar-purple: var(--pastel-purple-300);
+  --text-avatar-purple: var(--pastel-purple-800);
+  --bg-avatar-mint: var(--pastel-mint-200);
+  --border-avatar-mint: var(--pastel-mint-300);
+  --text-avatar-mint: var(--pastel-mint-800);
+  --bg-avatar-amber: var(--pastel-amber-200);
+  --border-avatar-amber: var(--pastel-amber-300);
+  --text-avatar-amber: var(--pastel-amber-800);
   --bg-surface-elevated: var(--neutral-0);
   --bg-muted: var(--neutral-100);
   --bg-muted-hover: var(--neutral-200);
@@ -258,16 +291,27 @@
   --fileupload-text-hover: var(--action-primary);
   --fileupload-icon: var(--text-secondary);
 
-  --tag-bg: var(--bg-surface);
-  --tag-bg-active: var(--action-primary);
-  --tag-border: var(--border-default);
-  --tag-text: var(--text-primary);
-  --tag-text-active: var(--action-primary-text);
-
-  --badge-bg-hot: var(--action-primary);
-  --badge-text-hot: var(--action-primary-text);
-  --badge-bg-new: var(--bg-surface-elevated);
-  --badge-text-new: var(--text-primary);
+  /* Tone — общая шкала для Tag, Badge, Avatar (как tone/* в HR Library) */
+  --tone-default-bg: var(--bg-surface);
+  --tone-default-text: var(--text-primary);
+  --tone-default-border: var(--border-default);
+  --tone-accent-bg: var(--action-primary);
+  --tone-accent-text: var(--text-inverse);
+  --tone-pink-bg: var(--bg-avatar-pink);
+  --tone-pink-text: var(--text-avatar-pink);
+  --tone-pink-border: var(--border-avatar-pink);
+  --tone-blue-bg: var(--bg-avatar-blue);
+  --tone-blue-text: var(--text-avatar-blue);
+  --tone-blue-border: var(--border-avatar-blue);
+  --tone-purple-bg: var(--bg-avatar-purple);
+  --tone-purple-text: var(--text-avatar-purple);
+  --tone-purple-border: var(--border-avatar-purple);
+  --tone-mint-bg: var(--bg-avatar-mint);
+  --tone-mint-text: var(--text-avatar-mint);
+  --tone-mint-border: var(--border-avatar-mint);
+  --tone-amber-bg: var(--bg-avatar-amber);
+  --tone-amber-text: var(--text-avatar-amber);
+  --tone-amber-border: var(--border-avatar-amber);
 
   --card-bg: var(--bg-surface);
   --card-border: var(--border-default);

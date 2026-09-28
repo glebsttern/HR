@@ -7,13 +7,10 @@ import { Button } from "./Button";
 import { Logo } from "./Logo";
 import { NavItem } from "./NavItem";
 import { IconClose, IconMenu } from "./icons";
+import { NAV } from "@/data/nav";
 import styles from "./Header.module.css";
 
-export const NAV = [
-  { href: "/", label: "Вакансии" },
-  { href: "/about-us", label: "Работа с нами" },
-  { href: "/terms", label: "Условия" },
-];
+export { NAV };
 
 export function Header() {
   const pathname = usePathname();

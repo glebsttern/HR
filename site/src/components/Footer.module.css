@@ -1,0 +1,100 @@
+/*
+ * Подвал 1:1 с компонентом `Footer` библиотеки (HR Library, 146:64):
+ * логотип слева, меню по центру, соцсети справа, под ними разделитель,
+ * ниже копирайт и ссылка на сайт компании. Паддинги 80 по бокам, 48 сверху/снизу.
+ */
+
+.footer {
+  padding: var(--spacing-48) var(--page-gutter);
+  background: var(--footer-bg);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  max-width: var(--shell-width);
+  margin: 0 auto;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-40);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-32);
+}
+
+.link {
+  color: var(--footer-link);
+  font-size: var(--font-size-nav);
+  font-weight: 500;
+  transition: color 0.18s ease;
+}
+
+.link:hover {
+  color: var(--footer-link-hover);
+}
+
+/* соцсети */
+.social {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-40);
+  height: var(--spacing-40);
+  border-radius: var(--radius-full);
+  background: var(--social-bg);
+  color: var(--social-icon);
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.socialLink:hover {
+  background: var(--social-bg-hover);
+  color: var(--social-icon-hover);
+}
+
+.divider {
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--divider-color);
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+}
+
+.copy {
+  margin: 0;
+  color: var(--footer-text);
+  font-size: var(--font-size-body-s);
+}
+
+.site {
+  color: var(--footer-link-hover);
+  font-size: var(--font-size-body-s);
+  font-weight: 600;
+  transition: opacity 0.18s ease;
+}
+
+.site:hover {
+  opacity: 0.75;
+}

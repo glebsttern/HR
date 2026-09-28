@@ -1,0 +1,87 @@
+/*
+ * Компоновка анкеты повторяет форму Источника (job.softclub.by/resume):
+ * одна белая карточка в колонку — шапка с крупным заголовком и выбором
+ * вакансии строкой, три поля в ряд, пунктирная зона резюме, капча, внизу
+ * кнопка и согласие в одну строку. Плашка шаблона анкеты — в правом верхнем углу.
+ */
+
+.section {
+  padding: var(--spacing-96) var(--page-gutter);
+  background: var(--bg-page);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-24);
+  max-width: var(--content-width);
+  margin: 0 auto;
+  /* 64 по кругу: при 80 по бокам заголовок Onder не влезает в одну строку. */
+  padding: var(--spacing-64);
+  border-radius: var(--radius-24);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card);
+}
+
+/* Плашка шаблона у Источника прижата к верхнему краю карточки справа. */
+.template {
+  position: absolute;
+  top: var(--spacing-24);
+  right: var(--spacing-24);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-16);
+  margin-bottom: var(--spacing-8);
+}
+
+.title {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-display-m);
+  font-weight: 400;
+  line-height: var(--line-height-normal);
+}
+
+/* Три поля в ряд — Фамилия и Имя, E-mail, Телефон. */
+.fields {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--spacing-16);
+}
+
+/* Капча: узкое поле и ссылка «Обновить» по нижнему краю поля. */
+.captcha {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--spacing-16);
+}
+
+.captcha > *:first-child {
+  width: 280px;
+  flex: none;
+}
+
+/* TextLink по умолчанию прижат к началу — здесь он стоит вровень с полем. */
+.captcha > button {
+  align-self: flex-end;
+}
+
+/* Кнопка и согласие — в одну строку, как у Источника. */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-24);
+  margin-top: var(--spacing-8);
+}
+
+.done {
+  margin: 0;
+  color: var(--text-success);
+  font-size: var(--font-size-body-m);
+}

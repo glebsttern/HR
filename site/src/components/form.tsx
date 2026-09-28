@@ -180,13 +180,21 @@ export function FileUpload({
   name,
   filled,
   hint,
+  label,
   required,
-}: { name: string } & FieldStyle) {
+  placeholder = "Перетащите файл или нажмите, чтобы выбрать",
+}: { name: string; placeholder?: string } & FieldStyle) {
   const id = useId();
   const [fileName, setFileName] = useState<string | null>(null);
 
   return (
     <span className={styles.uploadWrap}>
+      {label && (
+        <span className={styles.labelText}>
+          {label}
+          {required && <span className={styles.required}>*</span>}
+        </span>
+      )}
       <label
         className={filled ? `${styles.upload} ${styles.uploadFilled}` : styles.upload}
         htmlFor={id}
@@ -194,7 +202,7 @@ export function FileUpload({
         <span className={styles.uploadIcon}>
           <IconUpload size={24} />
         </span>
-        {fileName ?? "Перетащите файл или нажмите, чтобы выбрать"}
+        {fileName ?? placeholder}
       </label>
       <input
         id={id}

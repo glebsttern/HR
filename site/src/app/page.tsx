@@ -1,5 +1,6 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { ApplicationForm } from "@/components/ApplicationForm";
 import { VacancyList } from "@/components/VacancyList";
 import styles from "./page.module.css";
 
@@ -17,6 +18,7 @@ export default function VacanciesPage() {
           style={{ backdropFilter: "var(--filter-blur-glass)" }}
         >
           <VacancyList />
+          <ApplicationForm />
         </div>
       </main>
     </>

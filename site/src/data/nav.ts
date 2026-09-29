@@ -2,5 +2,6 @@
 export const NAV = [
   { href: "/", label: "Вакансии" },
   { href: "/about-us", label: "Работа с нами" },
-  { href: "/terms", label: "Условия" },
+  /* Условия живут разделом на той же странице, отдельной страницы у них нет. */
+  { href: "/about-us#terms", label: "Условия" },
 ];

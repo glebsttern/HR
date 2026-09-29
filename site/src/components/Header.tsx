@@ -22,7 +22,8 @@ export function Header() {
   const isActive = (href: string) =>
     href === "/"
       ? pathname === "/" || pathname.startsWith("/vacancies")
-      : pathname.startsWith(href);
+      // «Условия» — якорь на той же странице, сравниваем без него.
+      : pathname.startsWith(href.split("#")[0]);
 
   return (
     <header

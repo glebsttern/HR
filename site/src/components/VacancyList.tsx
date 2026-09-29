@@ -10,34 +10,24 @@ import styles from "./VacancyList.module.css";
 type Selected = Partial<Record<FilterKey, string>>;
 
 export function VacancyList() {
-  const [query, setQuery] = useState("");
   const [selected, setSelected] = useState<Selected>({});
 
-  const found = useMemo(() => {
-    const needle = query.trim().toLowerCase();
+  const found = useMemo(
+    () =>
+      VACANCIES.filter((vacancy) =>
+        FILTERS.every(({ key }) => {
+          const value = selected[key];
+          if (!value) return true;
+          const field = vacancy[key];
+          return Array.isArray(field) ? field.includes(value) : field === value;
+        }),
+      ),
+    [selected],
+  );
 
-    return VACANCIES.filter((vacancy) => {
-      const matchesQuery =
-        needle === "" ||
-        `${vacancy.title} ${vacancy.description} ${vacancy.stack.join(" ")}`
-          .toLowerCase()
-          .includes(needle);
-
-      const matchesFilters = FILTERS.every(({ key }) => {
-        const value = selected[key];
-        if (!value) return true;
-        const field = vacancy[key];
-        return Array.isArray(field) ? field.includes(value) : field === value;
-      });
-
-      return matchesQuery && matchesFilters;
-    });
-  }, [query, selected]);
-
-  const hasFilters = query !== "" || Object.values(selected).some(Boolean);
+  const hasFilters = Object.values(selected).some(Boolean);
 
   function reset() {
-    setQuery("");
     setSelected({});
   }
 
@@ -53,24 +43,6 @@ export function VacancyList() {
 
         <div className={styles.layout}>
           <aside className={styles.rail}>
-            <div className={styles.search}>
-              <input
-                className={styles.searchInput}
-                type="search"
-                placeholder="Искать вакансии..."
-                aria-label="Поиск по вакансиям"
-                value={query}
-                onChange={(event) => setQuery(event.target.value)}
-              />
-              <button
-                className={styles.searchButton}
-                type="button"
-                aria-label="Найти"
-              >
-                <IconSearch size={20} />
-              </button>
-            </div>
-
             {FILTERS.map(({ key, placeholder }) => (
               <Select
                 key={key}
@@ -78,8 +50,8 @@ export function VacancyList() {
                 options={filterOptions(key)}
                 aria-label={placeholder}
                 value={selected[key] ?? ""}
-                onChange={(event) =>
-                  setSelected((prev) => ({ ...prev, [key]: event.target.value }))
+                onChange={(next) =>
+                  setSelected((prev) => ({ ...prev, [key]: next }))
                 }
               />
             ))}

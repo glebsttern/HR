@@ -294,3 +294,76 @@
 .templateLink:hover .templateSubtitle {
   color: var(--text-inverse);
 }
+
+/*
+ * Свой выпадающий список. У Главного примера триггер стилизован (скругление,
+ * шеврон), а список отдан ОС — мы доводим до конца и его: та же скруглённая
+ * форма, тень карточки, подсветка наведённого и отметка выбранного.
+ */
+.select {
+  display: flex;
+  align-items: center;
+  text-align: left;
+}
+
+.selectEmpty {
+  color: var(--select-text-placeholder);
+}
+
+.selectIcon {
+  transition: transform 0.18s ease;
+}
+
+.selectIconOpen {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.options {
+  position: absolute;
+  z-index: 20;
+  top: calc(100% + var(--spacing-8));
+  left: 0;
+  right: 0;
+  max-height: 280px;
+  overflow-y: auto;
+  margin: 0;
+  padding: var(--spacing-8);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-16);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-card-hover);
+  list-style: none;
+}
+
+.option {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-12);
+  color: var(--text-primary);
+  font-size: var(--font-size-body-m);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.14s ease, color 0.14s ease;
+}
+
+.optionActive {
+  background: var(--bg-muted);
+}
+
+.optionSelected {
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+.optionSelected.optionActive {
+  background: var(--bg-accent-subtle);
+}
+
+/* У селекта-строки триггер узкий, а названия вакансий длинные — список шире. */
+.plainWrap .options {
+  right: auto;
+  width: max-content;
+  min-width: 100%;
+  max-width: 520px;
+}

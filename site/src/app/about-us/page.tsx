@@ -36,6 +36,10 @@ export default function AboutPage() {
                 Отправить резюме
               </Button>
             </Link>
+            {/* Условия — раздел этой же страницы, отдельного пункта в меню нет. */}
+            <a className={styles.introJump} href="#terms">
+              Условия
+            </a>
           </div>
         </section>
 

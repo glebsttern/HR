@@ -95,12 +95,12 @@
   gap: var(--spacing-16);
 }
 
+/* Стиль библиотеки `DS/Label/Label-S-Strong`: 12/130%, Bold, без трекинга. */
 .columnTitle {
   margin: 0;
   color: var(--footer-dark-heading);
   font-size: var(--font-size-label-s);
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
   text-transform: uppercase;
 }
 

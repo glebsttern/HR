@@ -24,11 +24,11 @@
   transform-origin: top center;
 }
 
-/* Надпись: центром на 4/9 высоты кадра — сверху 4 доли, снизу 5. */
+/* Надпись — центром кадра. */
 .content {
   position: absolute;
   left: 380px;
-  top: calc(1080px * 4 / 9);
+  top: 540px;
   z-index: 1;
   display: flex;
   flex-direction: column;
@@ -77,13 +77,13 @@
   line-height: var(--line-height-loose);
 }
 
-.actions {
-  display: flex;
-  justify-content: center;
-  gap: var(--spacing-16);
-}
-
+/* Ссылка на условия стоит у нижнего края экрана, по центру. */
 .jump {
+  position: absolute;
+  left: 50%;
+  bottom: var(--spacing-48);
+  z-index: 1;
+  translate: -50% 0;
   color: var(--text-secondary);
   font-size: var(--font-size-btn-m);
   text-decoration: underline;

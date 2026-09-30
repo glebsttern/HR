@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useLayoutEffect } from "react";
-import Link from "next/link";
 import { ABOUT, COMPANY_FACTS } from "@/data/company";
-import { Button } from "./Button";
 import { PLACED_FACTS } from "@/data/aboutHero";
 import { FactSticker } from "./FactSticker";
 import styles from "./AboutHero.module.css";
@@ -74,24 +72,11 @@ export function AboutHero() {
           </h1>
 
           <p className={styles.tagline}>{ABOUT.lead}</p>
-
-          <div className={styles.actions}>
-            <Link href="/#vacancies">
-              <Button variant="secondary" size="large">
-                Вакансии
-              </Button>
-            </Link>
-            <Link href="/#apply">
-              <Button variant="outline" size="large">
-                Отправить резюме
-              </Button>
-            </Link>
-          </div>
-
-          <a className={styles.jump} href="#terms">
-            Условия работы
-          </a>
         </div>
+
+        <a className={styles.jump} href="#terms">
+          Условия работы
+        </a>
       </div>
     </section>
   );

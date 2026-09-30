@@ -1,0 +1,219 @@
+/*
+ * FooterDark — тёмный подвал (компонент `FooterDark` в HR Library, отдельный
+ * от светлого `Footer`; старый компонент не тронут).
+ *
+ * Высоту даёт верхний CTA-блок: крупная строка-призыв дисплейным кеглем
+ * (те же токены, что у заголовка Хиро) + кнопка. Ниже — пять колонок
+ * (бренд, разделы, условия, контакты, офисы), внизу — копирайт.
+ * Все цвета — через слой `footer-dark-*` (tokens.css), прибитых значений нет.
+ */
+
+.footer {
+  padding: var(--spacing-96) var(--page-gutter) var(--spacing-48);
+  background: var(--footer-dark-bg);
+  color: var(--footer-dark-text);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-64);
+  max-width: var(--shell-width);
+  margin: 0 auto;
+}
+
+/* --- CTA ---------------------------------------------------------------- */
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-48);
+}
+
+.ctaText {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  min-width: 0;
+  gap: var(--spacing-8);
+}
+
+/*
+ * Типографика — стиль библиотеки `DS/Display/Display-XL` (48/205%, трекинг −2.5%),
+ * тот же, что у заголовка Хиро. Ширина ограничена, чтобы строка ломалась на две:
+ * именно это двухстрочие и задаёт высоту подвала.
+ */
+.ctaTitle {
+  /* Переносы стоят вручную, как в заголовке Хиро — свои не нужны. */
+  margin: 0;
+  color: var(--footer-dark-title);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-display-m);
+  font-weight: 400;
+  line-height: var(--line-height-display);
+  letter-spacing: -0.025em;
+}
+
+.ctaLead {
+  max-width: 1100px;
+  margin: 0;
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-loose);
+}
+
+.ctaButton {
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+/* --- Колонки ------------------------------------------------------------ */
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(280px, 1.6fr) repeat(4, minmax(0, 1fr));
+  gap: var(--spacing-40);
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-20);
+}
+
+.brandText {
+  max-width: 34ch;
+  margin: 0;
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-loose);
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-16);
+}
+
+.columnTitle {
+  margin: 0;
+  color: var(--footer-dark-heading);
+  font-size: var(--font-size-label-s);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.link,
+.linkAccent {
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-relaxed);
+  transition: color 0.18s ease;
+}
+
+.link {
+  color: var(--footer-dark-link);
+}
+
+.link:hover {
+  color: var(--footer-dark-link-hover);
+}
+
+.linkAccent {
+  color: var(--footer-dark-accent);
+}
+
+.linkAccent:hover {
+  color: var(--footer-dark-link-hover);
+}
+
+.address {
+  font-size: var(--font-size-body-s);
+  font-style: normal;
+  line-height: var(--line-height-relaxed);
+}
+
+.office {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-8);
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-relaxed);
+}
+
+.officeCity {
+  color: var(--footer-dark-link-hover);
+}
+
+.officeCountry {
+  color: var(--footer-dark-text);
+  font-size: var(--font-size-label-s);
+}
+
+/* --- Соцсети ------------------------------------------------------------ */
+
+.social {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.socialLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-40);
+  height: var(--spacing-40);
+  border-radius: var(--radius-full);
+  background: var(--footer-dark-social-bg);
+  color: var(--footer-dark-social-icon);
+  transition: background-color 0.18s ease;
+}
+
+.socialLink:hover {
+  background: var(--footer-dark-social-bg-hover);
+}
+
+/* --- Низ ---------------------------------------------------------------- */
+
+.divider {
+  height: 1px;
+  margin: 0;
+  border: 0;
+  background: var(--footer-dark-divider);
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-24);
+}
+
+.copy {
+  margin: 0;
+  font-size: var(--font-size-body-s);
+}
+
+.site {
+  color: var(--footer-dark-accent);
+  font-size: var(--font-size-body-s);
+  font-weight: 600;
+  transition: color 0.18s ease;
+}
+
+.site:hover {
+  color: var(--footer-dark-link-hover);
+}

@@ -156,3 +156,24 @@ export const PERKS: Perk[] = [
 export function findPerk(id: string): Perk | undefined {
   return PERKS.find((perk) => perk.id === id);
 }
+
+/**
+ * Контакты — реальные, с softclub.by/hello (сверено 2026-09-30).
+ * ⚠️ Отдельной HR-почты у компании публично нет: на job.softclub.by
+ * контактов не указано вовсе, поэтому в подвале стоит общая office@.
+ */
+export const CONTACTS = {
+  legal: 'ООО «СофтКлуб»',
+  address: "220141, Минск, пр-т Независимости, 168, корп. 1",
+  phone: { label: "+375 17 279-33-00", href: "tel:+375172793300" },
+  email: { label: "office@softclub.by", href: "mailto:office@softclub.by" },
+};
+
+/** География офисов — та же страница softclub.by/hello. */
+export const OFFICES = [
+  { city: "Минск", country: "Беларусь" },
+  { city: "Вильнюс", country: "Литва" },
+  { city: "Алматы", country: "Казахстан" },
+  { city: "Ташкент", country: "Узбекистан" },
+  { city: "Ашхабад", country: "Туркменистан" },
+];

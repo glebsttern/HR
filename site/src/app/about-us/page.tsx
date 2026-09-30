@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ABOUT, COMPANY_FACTS, PERKS } from "@/data/company";
 import { Button } from "@/components/Button";
-import { Footer } from "@/components/Footer";
+import { FooterDark } from "@/components/FooterDark";
 import { HERO_FACT_IDS } from "@/data/aboutHero";
 import { AboutHero } from "@/components/AboutHero";
 import { FactSticker } from "@/components/FactSticker";
@@ -115,7 +115,7 @@ export default function AboutPage() {
         </section>
       </main>
 
-      <Footer />
+      <FooterDark />
     </>
   );
 }

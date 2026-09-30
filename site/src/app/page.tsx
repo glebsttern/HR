@@ -1,4 +1,4 @@
-import { Footer } from "@/components/Footer";
+import { FooterDark } from "@/components/FooterDark";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { ApplicationForm } from "@/components/ApplicationForm";
@@ -22,7 +22,7 @@ export default function VacanciesPage() {
           <ApplicationForm />
         </div>
       </main>
-      <Footer />
+      <FooterDark />
     </>
   );
 }

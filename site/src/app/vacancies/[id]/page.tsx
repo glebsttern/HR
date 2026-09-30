@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { PERKS } from "@/data/company";
 import { VACANCIES, findVacancy } from "@/data/vacancies";
 import { Button } from "@/components/Button";
-import { Footer } from "@/components/Footer";
+import { FooterDark } from "@/components/FooterDark";
 import { Header } from "@/components/Header";
 import { TechIcon } from "@/components/TechIcon";
 import { IconArrowLeft, IconMapPin } from "@/components/icons";
@@ -147,7 +147,7 @@ export default async function VacancyPage({
         </section>
       </main>
 
-      <Footer />
+      <FooterDark />
     </>
   );
 }

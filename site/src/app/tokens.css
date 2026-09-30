@@ -73,7 +73,9 @@
 
   --black-overlay-10: rgba(0, 0, 0, 0.1);
   --black-overlay-40: rgba(0, 0, 0, 0.4);
+  --white-overlay-10: rgba(255, 255, 255, 0.1);
   --white-overlay-20: rgba(255, 255, 255, 0.2);
+  --white-overlay-60: rgba(255, 255, 255, 0.6);
   --white-overlay-80: rgba(255, 255, 255, 0.8);
   --blue-border-light: #e1e2fb;
 
@@ -182,11 +184,19 @@
   --bg-input: var(--neutral-0);
   --bg-input-disabled: var(--neutral-200);
 
+  /* Инверсная поверхность — тёмные блоки на светлой странице (подвал) */
+  --bg-inverse: var(--neutral-1000);
+  --bg-inverse-subtle: var(--white-overlay-10);
+  --bg-inverse-elevated: var(--white-overlay-20);
+
   --text-primary: var(--neutral-1000);
   --text-secondary: var(--neutral-500);
   --text-disabled: var(--neutral-300);
   --text-inverse: var(--neutral-0);
+  --text-inverse-secondary: var(--white-overlay-60);
   --text-accent: var(--green-500);
+  /* На чёрном green/500 уже не читается — акцент на инверсии светлее */
+  --text-accent-inverse: var(--green-400);
   --text-placeholder: var(--neutral-450);
   --text-error: var(--red-500);
   --text-success: var(--success-500);
@@ -194,6 +204,7 @@
   --text-info: var(--info-500);
 
   --border-default: var(--neutral-200);
+  --border-inverse: var(--white-overlay-10);
   --border-strong: var(--neutral-400);
   --border-accent: var(--green-500);
   --border-input: var(--blue-border-light);
@@ -337,6 +348,19 @@
   --footer-text: var(--text-secondary);
   --footer-link: var(--text-primary);
   --footer-link-hover: var(--text-accent);
+
+  /* FooterDark — тёмный подвал (компонент `FooterDark`, HR Library) */
+  --footer-dark-bg: var(--bg-inverse);
+  --footer-dark-title: var(--text-inverse);
+  --footer-dark-text: var(--text-inverse-secondary);
+  --footer-dark-heading: var(--text-inverse-secondary);
+  --footer-dark-link: var(--text-inverse-secondary);
+  --footer-dark-link-hover: var(--text-inverse);
+  --footer-dark-accent: var(--text-accent-inverse);
+  --footer-dark-divider: var(--border-inverse);
+  --footer-dark-social-bg: var(--bg-inverse-subtle);
+  --footer-dark-social-bg-hover: var(--action-primary);
+  --footer-dark-social-icon: var(--text-inverse);
 
   /* ---------------------------------------------------------------- */
   /* Раскладка страницы                                                */

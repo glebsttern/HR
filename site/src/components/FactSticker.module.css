@@ -1,0 +1,80 @@
+/*
+ * FactSticker — плашка-факт (компонент того же имени в HR Site).
+ * Белая карточка с тенью, как у Sticker в Хиро вакансий; внутри кружок
+ * с эмодзи, цифра и подводка. Сторона кружка задаётся вариантом.
+ */
+
+.sticker {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-12);
+  width: max-content;
+  max-width: 300px;
+  padding: var(--spacing-12) var(--spacing-16);
+  border-radius: var(--radius-16);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-card);
+}
+
+.badge {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border: 1px solid var(--tone-amber-border);
+  border-radius: var(--radius-full);
+  background: var(--tone-mint-bg);
+  font-size: 28px;
+  line-height: 1;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  min-width: 0;
+}
+
+.value {
+  color: var(--text-primary);
+  font-size: var(--font-size-label-l);
+  font-weight: 600;
+}
+
+.caption {
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-s);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Кружок смотрит внутрь экрана: слева — первым, справа — последним. */
+.left {
+  flex-direction: row;
+  text-align: left;
+}
+
+.right {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+.right .column {
+  align-items: flex-end;
+}
+
+.top {
+  flex-direction: column;
+  text-align: center;
+}
+
+.bottom {
+  flex-direction: column-reverse;
+  text-align: center;
+}
+
+.top .column,
+.bottom .column {
+  align-items: center;
+}

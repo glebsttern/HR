@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ABOUT, FACTS, PERKS } from "@/data/company";
+import { ABOUT, COMPANY_FACTS, PERKS } from "@/data/company";
 import { Button } from "@/components/Button";
 import { Footer } from "@/components/Footer";
+import { AboutHero, HERO_FACTS } from "@/components/AboutHero";
+import { FactSticker } from "@/components/FactSticker";
 import { Header } from "@/components/Header";
 import styles from "./page.module.css";
 
@@ -17,39 +19,22 @@ export default function AboutPage() {
     <>
       <Header />
 
+      <AboutHero />
+
       <main className={styles.page}>
-        {/* Шапка страницы — то же, что у Источника на «Работа с нами»:
-            кто мы одной фразой и два действия. */}
-        <section className={styles.intro}>
-          <p className={styles.kicker}>SoftClub</p>
-          <h1 className={styles.title}>Работа с нами</h1>
-          <p className={styles.lead}>{ABOUT.lead}</p>
 
-          <div className={styles.actions}>
-            <Link href="/#vacancies">
-              <Button variant="primary" size="medium">
-                Вакансии
-              </Button>
-            </Link>
-            <Link href="/#apply">
-              <Button variant="outline" size="medium">
-                Отправить резюме
-              </Button>
-            </Link>
-            {/* Условия — раздел этой же страницы, отдельного пункта в меню нет. */}
-            <a className={styles.introJump} href="#terms">
-              Условия
-            </a>
-          </div>
-        </section>
-
+        {/* Остальные факты — те четыре, что не попали на встречающий экран. */}
         <section className={styles.facts}>
-          {FACTS.map((fact) => (
-            <div className={styles.fact} key={fact.caption}>
-              <p className={styles.factValue}>{fact.value}</p>
-              <p className={styles.factCaption}>{fact.caption}</p>
-            </div>
-          ))}
+          {COMPANY_FACTS.filter((fact) => !HERO_FACTS.includes(fact.id)).map(
+            (fact) => (
+              <FactSticker
+                key={fact.id}
+                emoji={fact.emoji}
+                value={fact.value}
+                caption={fact.caption}
+              />
+            ),
+          )}
         </section>
 
         <section className={styles.about}>

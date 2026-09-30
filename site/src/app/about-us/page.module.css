@@ -10,9 +10,8 @@
   gap: var(--spacing-24);
   max-width: var(--content-width);
   margin: 0 auto;
-  /* Шапка зафиксирована поверх страницы — начинаем ниже её. */
-  padding: calc(var(--header-height) + var(--spacing-48)) var(--page-gutter)
-    var(--spacing-96);
+  /* Под встречающим экраном — шапку он перекрывает собой, как на вакансиях. */
+  padding: var(--spacing-48) var(--page-gutter) var(--spacing-96);
 }
 
 /* шапка страницы */
@@ -59,12 +58,11 @@
 }
 
 /* цифры */
-/* По две в ряд: в четыре колонки «90 000+» не помещается в строку
-   и строки наезжают друг на друга. */
 .facts {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--spacing-24);
+  justify-items: start;
 }
 
 .fact {

@@ -1,0 +1,143 @@
+/*
+ * Встречающий экран «Работы с нами». Механика Хиро вакансий: надпись по
+ * центру и ближе к верху, вокруг неё по четырём сторонам — плашки-факты.
+ * Плашки стоят в долях кадра, поэтому композиция держится на любой ширине,
+ * а сами плашки остаются читаемого размера и не мельчают.
+ */
+
+.hero {
+  position: relative;
+  /* Пропорция кадра 1920×1080, но не выше экрана и не ниже разумного. */
+  height: clamp(640px, 56.25vw, 1000px);
+  overflow: hidden;
+  background: var(--bg-page);
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  max-width: var(--page-width);
+  margin: 0 auto;
+}
+
+/* надпись: по центру, центр блока на 4/9 высоты — сверху 4 доли, снизу 5 */
+.content {
+  position: absolute;
+  left: 50%;
+  top: calc(100% * 4 / 9);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-16);
+  width: min(1160px, 68%);
+  translate: -50% -50%;
+  text-align: center;
+  animation: contentIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+@keyframes contentIn {
+  from {
+    opacity: 0;
+    scale: 0.94;
+  }
+}
+
+.kicker {
+  margin: 0;
+  color: var(--text-accent);
+  font-size: var(--font-size-label-l);
+  font-weight: 600;
+}
+
+.heading {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: var(--font-family-display);
+  font-size: var(--font-size-display-l);
+  font-weight: 400;
+  line-height: var(--line-height-display);
+  letter-spacing: -0.0625em;
+  /* Переносы стоят в тексте вручную — свои не нужны. */
+  white-space: nowrap;
+}
+
+.accent {
+  color: var(--text-accent);
+}
+
+.lead {
+  max-width: 46ch;
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: var(--font-size-body-l);
+  line-height: var(--line-height-relaxed);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-16);
+  margin-top: var(--spacing-8);
+}
+
+.jump {
+  color: var(--text-secondary);
+  font-size: var(--font-size-btn-m);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  transition: color 0.18s ease;
+}
+
+.jump:hover {
+  color: var(--text-accent);
+}
+
+/* Плашки-факты по четырём сторонам, центром в точку. */
+.slot {
+  position: absolute;
+  z-index: 2;
+  translate: -50% -50%;
+  animation: factIn 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+.slot[data-position="left"] {
+  left: 15%;
+  top: 27%;
+  animation-delay: 0.35s;
+}
+
+.slot[data-position="right"] {
+  left: 85%;
+  top: 31%;
+  animation-delay: 0.5s;
+}
+
+.slot[data-position="top"] {
+  left: 82%;
+  top: 76%;
+  animation-delay: 0.65s;
+}
+
+.slot[data-position="bottom"] {
+  left: 17%;
+  top: 79%;
+  animation-delay: 0.8s;
+}
+
+@keyframes factIn {
+  from {
+    opacity: 0;
+    translate: -50% calc(-50% + 24px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content,
+  .slot {
+    animation-duration: 0.01ms;
+    animation-delay: 0ms;
+  }
+}

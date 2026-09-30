@@ -18,6 +18,38 @@ export const FACTS = [
   { value: "90 000+", caption: "Финансовых служащих работают на нашем ПО" },
 ];
 
+/**
+ * Факты для встречающего экрана — с главной softclub.by (сверено 2026-09-30).
+ * Формулировки их, эмодзи наши. Компонент в Figma — `FactSticker` (HR Site).
+ */
+export type CompanyFact = {
+  id: string;
+  emoji: string;
+  value: string;
+  caption: string;
+};
+
+export const COMPANY_FACTS: CompanyFact[] = [
+  { id: "founded", emoji: "🏛️", value: "1993", caption: "Год основания компании" },
+  { id: "top5", emoji: "🏆", value: "ТОП-5", caption: "Продуктовых компаний Беларуси" },
+  {
+    id: "top100",
+    emoji: "🌍",
+    value: "ТОП-100",
+    caption: "FinTech компаний мира по The Financial Technology",
+  },
+  { id: "years", emoji: "⏳", value: "30+", caption: "Лет опыта с клиентами enterprise уровня" },
+  {
+    id: "clients",
+    emoji: "🤝",
+    value: "1500+",
+    caption: "Компаний по всему миру используют решения СофтКлуб",
+  },
+  { id: "geo", emoji: "🌐", value: "24+", caption: "Страны составляет география деятельности" },
+  { id: "users", emoji: "👥", value: "90 000+", caption: "Финансовых служащих работают на нашем ПО" },
+  { id: "team", emoji: "💼", value: "1000", caption: "Профессионалов работает в компании" },
+];
+
 export type Perk = {
   id: string;
   title: string;

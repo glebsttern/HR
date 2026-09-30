@@ -64,6 +64,7 @@
 - `font/family/primary` = **Inter**
 - Размеры: `display-xl` 80 · `display-l` 64 · `display-m` 48 · `h1` 40 · `h2` 32 · `h3` 24 · `h4` 20 · `h5` 16 · `body-l` 18 · `body-m` 16 · `body-s` 14 · `label-l` 16 · `label-m` 14 · `label-s` 12 · `caption-m` 12 · `caption-s` 10 · `nav` 13 · `btn-l` 14 · `btn-m` 13 · `btn-s` 12 · `tag` 11
 - Line-height: `tight` 1.0 · `snug` 1.1 · `normal` 1.3 · `relaxed` 1.4 · `loose` 1.6
+- **Текстовые стили с плотным начертанием:** `DS/Label/Label-L-Strong` (Semi Bold 16), `Label-M-Strong` (14), `Label-S-Strong` (12) и `DS/Body/Body-L-Strong` (Semi Bold 18, заведён 2026-09-30 под цифру в `FactSticker`). У всех размер привязан к соответствующей переменной `font/size/*`, интерлиньяж — как у обычной версии стиля.
 - Веса как отдельных Variables нет (веса, судя по всему, заданы текстовыми стилями на странице «Styles & Variables», не Variables — не входит в текущий охват).
 
 ### Радиусы (`🔘 Radius`, 7 шт.)

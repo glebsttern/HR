@@ -37,10 +37,12 @@
   min-width: 0;
 }
 
+/* Стиль DS/Body/Body-L-Strong: та же ступень, что у Body-L, но Semi Bold. */
 .value {
   color: var(--text-primary);
-  font-size: var(--font-size-label-l);
+  font-size: var(--font-size-body-l);
   font-weight: 600;
+  line-height: var(--line-height-loose);
 }
 
 .caption {

@@ -1,28 +1,42 @@
+"use client";
+
+import { useEffect, useLayoutEffect } from "react";
 import Link from "next/link";
 import { ABOUT, COMPANY_FACTS } from "@/data/company";
 import { Button } from "./Button";
-import { FactSticker, type FactPosition } from "./FactSticker";
+import { PLACED_FACTS } from "@/data/aboutHero";
+import { FactSticker } from "./FactSticker";
 import styles from "./AboutHero.module.css";
 
-/**
- * Встречающий экран «Работы с нами». Механика та же, что у Хиро вакансий:
- * заголовок по центру, ближе к верху, а вокруг него по четырём сторонам —
- * плашки-факты. Факты и их порядок — с главной softclub.by.
- */
-const PLACED: { id: string; position: FactPosition }[] = [
-  { id: "founded", position: "left" },
-  { id: "users", position: "right" },
-  { id: "top100", position: "top" },
-  { id: "team", position: "bottom" },
-];
+/** Кадр макета — тот же, что у Хиро вакансий. */
+const FRAME = { width: 1920, height: 1080 };
 
-/** Какие факты заняты встречающим экраном — ниже по странице они не повторяются. */
-export const HERO_FACTS = PLACED.map((item) => item.id);
+/**
+ * Кадр 1920×1080 целиком вписывается в окно: `--ka` — во сколько раз он
+ * уменьшен. Ровно та же механика, что у Хиро вакансий, поэтому надпись
+ * на обеих страницах выходит одного размера на экране.
+ */
+function fitFrame() {
+  const k = Math.min(
+    window.innerWidth / FRAME.width,
+    window.innerHeight / FRAME.height,
+  );
+  document.documentElement.style.setProperty("--ka", k.toFixed(4));
+}
 
 export function AboutHero() {
-  const facts = PLACED.map(({ id, position }) => {
-    const fact = COMPANY_FACTS.find((item) => item.id === id);
-    return fact ? { ...fact, position } : null;
+  useLayoutEffect(() => {
+    fitFrame();
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("resize", fitFrame);
+    return () => window.removeEventListener("resize", fitFrame);
+  }, []);
+
+  const facts = PLACED_FACTS.map((placed) => {
+    const fact = COMPANY_FACTS.find((item) => item.id === placed.id);
+    return fact ? { ...fact, ...placed } : null;
   }).filter((fact) => fact !== null);
 
   return (
@@ -30,17 +44,27 @@ export function AboutHero() {
       <div className={styles.frame}>
         {facts.map((fact) => (
           <div
-            className={styles.slot}
-            data-position={fact.position}
+            className={styles.anchor}
             key={fact.id}
+            style={
+              {
+                left: `${fact.at.x}px`,
+                top: `${fact.at.y}px`,
+                "--rotate": `${fact.rotate}deg`,
+                "--scale": fact.scale,
+                "--delay": fact.delay,
+              } as React.CSSProperties
+            }
             aria-hidden
           >
-            <FactSticker
-              emoji={fact.emoji}
-              value={fact.value}
-              caption={fact.caption}
-              position={fact.position}
-            />
+            <div className={styles.floating}>
+              <FactSticker
+                emoji={fact.emoji}
+                value={fact.value}
+                caption={fact.caption}
+                position={fact.position}
+              />
+            </div>
           </div>
         ))}
 
@@ -48,11 +72,12 @@ export function AboutHero() {
           <h1 className={styles.heading} id="about-heading">
             Работа <span className={styles.accent}>с нами</span>
           </h1>
-          <p className={styles.lead}>{ABOUT.lead}</p>
+
+          <p className={styles.tagline}>{ABOUT.lead}</p>
 
           <div className={styles.actions}>
             <Link href="/#vacancies">
-              <Button variant="primary" size="large">
+              <Button variant="secondary" size="large">
                 Вакансии
               </Button>
             </Link>

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { ABOUT, COMPANY_FACTS, PERKS } from "@/data/company";
 import { Button } from "@/components/Button";
 import { Footer } from "@/components/Footer";
-import { AboutHero, HERO_FACTS } from "@/components/AboutHero";
+import { HERO_FACT_IDS } from "@/data/aboutHero";
+import { AboutHero } from "@/components/AboutHero";
 import { FactSticker } from "@/components/FactSticker";
 import { Header } from "@/components/Header";
 import styles from "./page.module.css";
@@ -25,7 +26,7 @@ export default function AboutPage() {
 
         {/* Остальные факты — те четыре, что не попали на встречающий экран. */}
         <section className={styles.facts}>
-          {COMPANY_FACTS.filter((fact) => !HERO_FACTS.includes(fact.id)).map(
+          {COMPANY_FACTS.filter((fact) => !HERO_FACT_IDS.includes(fact.id)).map(
             (fact) => (
               <FactSticker
                 key={fact.id}

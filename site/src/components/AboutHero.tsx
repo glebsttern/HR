@@ -45,11 +45,8 @@ export function AboutHero() {
         ))}
 
         <div className={styles.content}>
-          <p className={styles.kicker}>SoftClub</p>
           <h1 className={styles.heading} id="about-heading">
-            Работа
-            <br />
-            <span className={styles.accent}>с нами</span>
+            Работа <span className={styles.accent}>с нами</span>
           </h1>
           <p className={styles.lead}>{ABOUT.lead}</p>
 

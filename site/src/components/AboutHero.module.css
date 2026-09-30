@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--spacing-16);
+  gap: var(--spacing-24);
   width: min(1160px, 68%);
   translate: -50% -50%;
   text-align: center;
@@ -44,13 +44,6 @@
   }
 }
 
-.kicker {
-  margin: 0;
-  color: var(--text-accent);
-  font-size: var(--font-size-label-l);
-  font-weight: 600;
-}
-
 .heading {
   margin: 0;
   color: var(--text-primary);
@@ -59,7 +52,7 @@
   font-weight: 400;
   line-height: var(--line-height-display);
   letter-spacing: -0.0625em;
-  /* Переносы стоят в тексте вручную — свои не нужны. */
+  /* Заголовок идёт одной строкой — как в Хиро вакансий, свои переносы не нужны. */
   white-space: nowrap;
 }
 
@@ -72,7 +65,7 @@
   margin: 0;
   color: var(--text-secondary);
   font-size: var(--font-size-body-l);
-  line-height: var(--line-height-relaxed);
+  line-height: var(--line-height-loose);
 }
 
 .actions {

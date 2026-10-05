@@ -1,3 +1,16 @@
+/*
+ * Список вакансий. Состав и раскладка — с Источника (job.softclub.by):
+ * заголовок, под ним строка из четырёх фильтров, под ними список в одну колонку
+ * на всю ширину. Механика карточки — в VacancyCard.
+ *
+ * Наши добавки к Источнику: счётчик найденного, «Сбросить» и пустое состояние —
+ * без них фильтры работают вслепую.
+ *
+ * Карточки-призыва «Не нашли подходящей вакансии?» здесь намеренно нет, хотя у
+ * Источника она есть: у нас сразу под списком стоит сама форма отклика, а ниже —
+ * тот же призыв в подвале. Третий повтор на одном экране ничего не добавляет.
+ */
+
 .section {
   /* Сверху отступ даёт обёртка списка — она же полоска над Хиро. */
   padding: 0 var(--page-gutter) var(--spacing-80);
@@ -30,77 +43,22 @@
   font-size: var(--font-size-body-m);
 }
 
-/* левый рельс с фильтрами + список справа */
-.layout {
-  display: grid;
-  grid-template-columns: 320px minmax(0, 1fr);
-  gap: var(--spacing-40);
-  align-items: start;
-}
-
-.rail {
-  position: sticky;
-  top: calc(var(--header-height) + var(--spacing-24));
+/* строка фильтров */
+.filters {
   display: flex;
-  flex-direction: column;
-  gap: var(--spacing-12);
-}
-
-/* поиск */
-.search {
-  display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: var(--spacing-8);
-  height: var(--spacing-56);
-  padding-left: var(--spacing-20);
-  border: 1px solid var(--search-border);
-  border-radius: var(--radius-full);
-  background: var(--search-bg);
-  box-shadow: var(--shadow-search);
-}
-
-.searchInput {
-  flex: 1;
-  min-width: 0;
-  border: none;
-  background: none;
-  font-size: var(--font-size-body-m);
-  color: var(--text-primary);
-}
-
-.searchInput::placeholder {
-  color: var(--input-text-placeholder);
-}
-
-.searchInput:focus {
-  outline: none;
-}
-
-.searchButton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-  width: var(--spacing-56);
-  height: var(--spacing-56);
-  margin: -1px -1px -1px 0;
-  border-radius: var(--radius-full);
-  background: var(--search-btn-bg);
-  color: var(--text-inverse);
-  transition: background-color 0.18s ease;
-}
-
-.searchButton:hover {
-  background: var(--search-btn-bg-hover);
+  gap: var(--spacing-8) var(--spacing-24);
+  margin-top: calc(-1 * var(--spacing-8));
 }
 
 .reset {
-  align-self: flex-start;
   padding: var(--spacing-8) 0;
   color: var(--text-secondary);
   font-size: var(--font-size-body-s);
   font-weight: 600;
   text-decoration: underline;
+  transition: color 0.18s ease;
 }
 
 .reset:hover {
@@ -123,29 +81,9 @@
   text-align: center;
 }
 
-@media (max-width: 1100px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .rail {
-    position: static;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .search {
-    grid-column: 1 / -1;
-  }
-}
-
 @media (max-width: 900px) {
   .section {
     padding: var(--spacing-64) var(--spacing-24);
-  }
-
-  .rail {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -156,7 +94,8 @@
     gap: var(--spacing-4);
   }
 
-  .title {
-    font-size: var(--font-size-h1);
+  .filters {
+    flex-direction: column;
+    align-items: stretch;
   }
 }

@@ -3,11 +3,20 @@
 import { useMemo, useState } from "react";
 import { FILTERS, VACANCIES, filterOptions, type FilterKey } from "@/data/vacancies";
 import { Select } from "./form";
-import { IconSearch } from "./icons";
 import { VacancyCard } from "./VacancyCard";
 import styles from "./VacancyList.module.css";
 
 type Selected = Partial<Record<FilterKey, string>>;
+
+/** «4 вакансии» / «2 вакансии» — чтобы счётчик читался, а не считался. */
+function plural(n: number) {
+  const ten = n % 100;
+  const one = n % 10;
+  if (ten > 10 && ten < 20) return "вакансий";
+  if (one === 1) return "вакансия";
+  if (one > 1 && one < 5) return "вакансии";
+  return "вакансий";
+}
 
 export function VacancyList() {
   const [selected, setSelected] = useState<Selected>({});
@@ -37,44 +46,46 @@ export function VacancyList() {
         <header className={styles.head}>
           <h2 className={styles.title}>Открытые вакансии</h2>
           <p className={styles.count}>
-            {found.length} из {VACANCIES.length}
+            {hasFilters
+              ? `${found.length} из ${VACANCIES.length}`
+              : `${VACANCIES.length} ${plural(VACANCIES.length)}`}
           </p>
         </header>
 
-        <div className={styles.layout}>
-          <aside className={styles.rail}>
-            {FILTERS.map(({ key, placeholder }) => (
-              <Select
-                key={key}
-                placeholder={placeholder}
-                options={filterOptions(key)}
-                aria-label={placeholder}
-                value={selected[key] ?? ""}
-                onChange={(next) =>
-                  setSelected((prev) => ({ ...prev, [key]: next }))
-                }
-              />
-            ))}
+        {/* Фильтры в строку над списком — так они стоят у Источника. */}
+        <div className={styles.filters}>
+          {FILTERS.map(({ key, placeholder }) => (
+            <Select
+              key={key}
+              plain
+              placeholder={placeholder}
+              options={filterOptions(key)}
+              aria-label={placeholder}
+              value={selected[key] ?? ""}
+              onChange={(next) =>
+                setSelected((prev) => ({ ...prev, [key]: next }))
+              }
+            />
+          ))}
 
-            {hasFilters && (
-              <button className={styles.reset} type="button" onClick={reset}>
-                Сбросить фильтры
-              </button>
-            )}
-          </aside>
+          {hasFilters && (
+            <button className={styles.reset} type="button" onClick={reset}>
+              Сбросить
+            </button>
+          )}
+        </div>
 
-          <div className={styles.cards}>
-            {found.map((vacancy) => (
-              <VacancyCard key={vacancy.id} {...vacancy} />
-            ))}
+        <div className={styles.cards}>
+          {found.map((vacancy) => (
+            <VacancyCard key={vacancy.id} {...vacancy} />
+          ))}
 
-            {found.length === 0 && (
-              <p className={styles.empty}>
-                Под эти условия вакансий нет. Попробуйте снять часть фильтров или
-                отправьте резюме — мы вернёмся, когда появится подходящая.
-              </p>
-            )}
-          </div>
+          {found.length === 0 && (
+            <p className={styles.empty}>
+              Под эти условия вакансий нет. Снимите часть фильтров или
+              отправьте резюме — вернёмся, когда появится подходящая задача.
+            </p>
+          )}
         </div>
       </div>
     </section>

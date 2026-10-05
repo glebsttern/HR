@@ -15,12 +15,16 @@
   box-shadow: var(--shadow-card-hover);
 }
 
+/*
+ * Стиль библиотеки `DS/Heading/H4`: Onder 20, интерлиньяж 205%.
+ * На 1.3 заглавные Onder (39px при кегле 20) налезали друг на друга.
+ */
 .title {
   font-family: var(--font-family-display);
   color: var(--card-title);
   font-size: var(--font-size-h4);
   font-weight: 400;
-  line-height: var(--line-height-normal);
+  line-height: var(--line-height-display);
 }
 
 .description {
